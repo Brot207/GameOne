@@ -12,11 +12,11 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-public class StartPanel extends JFrame{
+public class StartFrame extends JFrame{
 	
 	JPanel panel= null;
 
-	public StartPanel(){
+	public StartFrame(){
 		panel = new JPanel(new GridLayout(3, 1));
 		panel.setPreferredSize(new Dimension(300, 500));
 	
