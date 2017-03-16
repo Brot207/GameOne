@@ -137,6 +137,8 @@ public class GamePanel extends JPanel implements ActionListener {
 	        if ((key == KeyEvent.VK_DOWN) && (direction != Direction.UP)) {
 	        	direction = Direction.DOWN;
 	        }
+	        
+//	        if(key == KeyEvent.)
 	    }
 	}
 }

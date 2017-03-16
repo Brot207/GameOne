@@ -13,9 +13,9 @@ import javax.swing.JPanel;
  * @author stang
  *
  */
-public class EndButton  extends JButton{
+public class ExitButton  extends JButton{
 	
-	public EndButton(){
+	public ExitButton(){
 		this.setText("Exit");
 		this.addActionListener(new ActionListener() {
 			

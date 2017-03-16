@@ -1,7 +1,7 @@
 package GameWindow;
 
 
-import Buttons.EndButton;
+import Buttons.ExitButton;
 import Buttons.OptionButton;
 import Buttons.StartButton;
 
@@ -22,11 +22,11 @@ public class StartFrame extends JFrame{
 	JPanel panel= null;
 
 	public StartFrame(){
-		panel = new JPanel(new GridLayout(3, 1));
+		panel = new JPanel(new GridLayout(4, 1));
 		panel.setPreferredSize(new Dimension(300, 500));
 	
 		JButton start = new StartButton(panel);
-		JButton exit = new EndButton();
+		JButton exit = new ExitButton();
 		JButton config = new OptionButton(panel);
 		panel.add(start);	
 		panel.add(config);

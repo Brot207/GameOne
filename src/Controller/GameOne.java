@@ -45,23 +45,21 @@ public class GameOne {
 	public void gameLoop(){
 		//creates the snake
 		Snake snake = new Snake();
-		
-		//creates the Frame where our game panel will fit in.
-		JFrame f = new JFrame();
-		f.add(new GamePanel(snake));
-		f.setResizable(false);
-		f.pack();
-		f.setTitle("GameOne -- SnakeAdvanced");
-		f.setLocationRelativeTo(null);
-		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
         EventQueue.invokeLater(new Runnable() {
 
 			@Override
 			public void run() {
-		        JFrame frame = f;
+				//creates the Frame where our game panel will fit in.
+				JFrame f = new JFrame();
+				f.add(new GamePanel(snake));
+				f.setResizable(false);
+				f.pack();
+				f.setTitle("GameOne -- SnakeAdvanced");
+				f.setLocationRelativeTo(null);
+				f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		        
-				frame.setVisible(true);
+				f.setVisible(true);
 				System.out.println("game has started");
 				
 			}
