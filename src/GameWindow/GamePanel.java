@@ -162,12 +162,20 @@ public class GamePanel extends JPanel implements ActionListener {
 	        
 	        if(key == KeyEvent.VK_SPACE) {
 	        
-	        	if(timer.isRunning()) timer.stop();
-	        	else timer.restart();
+	        	if(timer.isRunning()) {
+	        		timer.stop();
+	        		System.out.println("*****   Game paused");
+	        	}else {
+	        		System.out.println("*****   Game restarted");
+	        		timer.restart();
+	        	}
 	        }
 	        
 	        if(key == KeyEvent.VK_ESCAPE) {
-	        	if(timer.isRunning()) inGame = false;
+	        	if(timer.isRunning()) {
+	        		System.out.println("Game stopped");
+	        		inGame = false;
+	        	}
 	        }
 	    }
 	}

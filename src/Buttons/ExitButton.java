@@ -21,6 +21,7 @@ public class ExitButton  extends JButton{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				System.out.println("*******************************Application stopped*******************************");
 				System.exit(0);
 				
 			}
