@@ -14,7 +14,8 @@ import javax.swing.JPanel;
 import javax.swing.Timer;
 
 import Controller.GameOne;
-import GameObjects.Part;
+import GameObjects.Dot;
+import GameObjects.DotTyp;
 import GameObjects.Snake;
 
 /**
@@ -39,6 +40,7 @@ public class GamePanel extends JPanel implements ActionListener {
     private boolean inGame = true;
 	
     private Timer timer;
+    private int timerTickCount = 0;
     private Image part;
 	
     /**
@@ -47,6 +49,8 @@ public class GamePanel extends JPanel implements ActionListener {
      */
 	public GamePanel(Snake s){
 		this.snake = s;
+		this.snake.setpWIDTH(this.WIDTH);
+		this.snake.setpHEIGHT(this.HEIGHT);
 		
 		addKeyListener(new TAdapter());
 		setBackground(Color.black);
@@ -75,9 +79,11 @@ public class GamePanel extends JPanel implements ActionListener {
 		if(inGame) {
 
 			this.dotCount = snake.getLength();
+			
+			g.drawImage(new Dot(DotTyp.HEAD, 100, 100).getImage(), 100, 100, this);
 
             for (int z = 0; z < this.dotCount; z++) {
-                Part p = snake.getPart_i(z);
+                Dot p = snake.getPart_i(z);
                 part = p.getImage();
                 g.drawImage(part, p.getLocX(), p.getLocY(), this);
             }
@@ -100,11 +106,28 @@ public class GamePanel extends JPanel implements ActionListener {
 	
 	
 	
+	/**
+	 * @return the hEIGHT
+	 */
+	public int getHEIGHT() {
+		return HEIGHT;
+	}
+
+
+	/**
+	 * @return the wIDTH
+	 */
+	public int getWIDTH() {
+		return WIDTH;
+	}
+
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(inGame){
+			timerTickCount += 1;
 			this.move();
-			System.out.println("game is running");
+			System.out.println(timerTickCount + "   game is running");
 		}
 		
 		repaint();
@@ -113,8 +136,6 @@ public class GamePanel extends JPanel implements ActionListener {
 	
 	/**
 	 * The key listener of the panel
-	 * @author stang
-	 *
 	 */
 	private class TAdapter extends KeyAdapter{
 		
@@ -124,19 +145,19 @@ public class GamePanel extends JPanel implements ActionListener {
 	        int key = e.getKeyCode();
 
 	        if ((key == KeyEvent.VK_LEFT) && (direction != Direction.RIGHT)) {
-	            direction = Direction.LEFT;
+	            if(timer.isRunning()) direction = Direction.LEFT;
 	        }
 
 	        if ((key == KeyEvent.VK_RIGHT) && (direction != Direction.LEFT)) {
-	        	direction = Direction.RIGHT;
+	        	if(timer.isRunning()) direction = Direction.RIGHT;
 	        }
 
 	        if ((key == KeyEvent.VK_UP) && (direction != Direction.DOWN)) {
-	        	direction = Direction.UP;
+	        	if(timer.isRunning()) direction = Direction.UP;
 	        }
 
 	        if ((key == KeyEvent.VK_DOWN) && (direction != Direction.UP)) {
-	        	direction = Direction.DOWN;
+	        	if(timer.isRunning()) direction = Direction.DOWN;
 	        }
 	        
 	        if(key == KeyEvent.VK_SPACE) {
@@ -146,7 +167,7 @@ public class GamePanel extends JPanel implements ActionListener {
 	        }
 	        
 	        if(key == KeyEvent.VK_ESCAPE) {
-	        	inGame = false;
+	        	if(timer.isRunning()) inGame = false;
 	        }
 	    }
 	}

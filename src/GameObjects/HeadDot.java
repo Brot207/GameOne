@@ -7,12 +7,12 @@ import javax.swing.ImageIcon;
  * @author stang
  *
  */
-public class Head extends Part{
+public class HeadDot extends Dot{
 
 	
 	ImageIcon ball = new ImageIcon("head.png");
 	
-	public Head(int x, int y){
-		super(PartTyp.HEAD, x, y);
+	public HeadDot(int x, int y){
+		super(DotTyp.HEAD, x, y);
 	}
 }

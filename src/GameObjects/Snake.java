@@ -17,21 +17,25 @@ public class Snake {
 	private int length = startLength;
 	private int dotSize = 10;
 	
-	private List<Part> parts = null;
+	private int pWIDTH = 0;
+	private int pHEIGHT = 0;
+	
+	
+	private List<Dot> parts = null;
 	
 	/**
 	 * Creates a snake given by the default length
 	 */
 	public Snake(){
-		parts = new ArrayList<Part>();
+		parts = new ArrayList<Dot>();
 		
 		for(int x = 0; x < startLength; x++){
 			if(x == 0){
-				parts.add(new Head(50, 50));
+				parts.add(new HeadDot(50, 50));
 				continue;
 			}
 			
-			parts.add(new Part(50 - x*dotSize, 50));
+			parts.add(new Dot(50 - x*dotSize, 50));
 		}
 	}
 
@@ -46,22 +50,28 @@ public class Snake {
 		}
 		
 		if (d == Direction.LEFT) {
-            parts.get(0).setLocX( parts.get(0).getLocX() - dotSize);
+			if(parts.get(0).getLocX() <= 0) parts.get(0).setLocX(pWIDTH);
+			else parts.get(0).setLocX( parts.get(0).getLocX() - dotSize);
+            
         }
 
         if (d == Direction.RIGHT) {
-        	parts.get(0).setLocX( parts.get(0).getLocX() + dotSize);
+        	if(parts.get(0).getLocX() >= pWIDTH) parts.get(0).setLocX(0);
+        	else parts.get(0).setLocX( parts.get(0).getLocX() + dotSize);
         }
 
         if (d == Direction.UP) {
-        	parts.get(0).setLocY( parts.get(0).getLocY() - dotSize);
+        	if(parts.get(0).getLocY() <= 0) parts.get(0).setLocY(pHEIGHT);
+        	else parts.get(0).setLocY( parts.get(0).getLocY() - dotSize);
         }
 
         if (d == Direction.DOWN) {
-        	parts.get(0).setLocY( parts.get(0).getLocY() + dotSize);
+        	if(parts.get(0).getLocY() >= pHEIGHT) parts.get(0).setLocY(0);
+        	else parts.get(0).setLocY( parts.get(0).getLocY() + dotSize);
         }
 		
 	}
+	
 	
 	
 	/**
@@ -95,8 +105,22 @@ public class Snake {
 	/**
 	 * @return the parts
 	 */
-	public Part getPart_i(int i) {
+	public Dot getPart_i(int i) {
 		return parts.get(i);
+	}
+	
+	/**
+	 * @param pWIDTH the pWIDTH to set
+	 */
+	public void setpWIDTH(int pWIDTH) {
+		this.pWIDTH = pWIDTH;
+	}
+
+	/**
+	 * @param pHEIGHT the pHEIGHT to set
+	 */
+	public void setpHEIGHT(int pHEIGHT) {
+		this.pHEIGHT = pHEIGHT;
 	}
 
 }

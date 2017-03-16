@@ -55,7 +55,6 @@ public class GameOne {
 				//creates the Frame where our game panel will fit in.
 				gameFrame = new GameFrame(new GamePanel(snake));
 				gameFrame.setVisible(true);
-				
 				System.out.println("game has started");
 				
 			}

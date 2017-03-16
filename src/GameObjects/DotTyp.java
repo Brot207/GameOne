@@ -1,6 +1,6 @@
 package GameObjects;
 
-public enum PartTyp {
+public enum DotTyp {
 	HEAD,
 	BODYPART;
 

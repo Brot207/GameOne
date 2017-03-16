@@ -7,10 +7,10 @@ import javax.swing.ImageIcon;
  * @author stang
  *
  */
-public class Part extends ImageIcon {
+public class Dot extends ImageIcon {
 	
 	ImageIcon icon = null;
-	PartTyp typ = null;
+	DotTyp typ = null;
 	
 	private int locX;
 	private int locY;
@@ -20,7 +20,7 @@ public class Part extends ImageIcon {
 	 * @param x The x coordinate
 	 * @param y The y coordinate
 	 */
-	public Part(int x, int y){
+	public Dot(int x, int y){
 		this.setImage(new ImageIcon("src/Icons/dot.gif").getImage()); 
 		locX = x;
 		locY = y;
@@ -32,8 +32,8 @@ public class Part extends ImageIcon {
 	 * @param x The x coordinate
 	 * @param y The y coordinate
 	 */
-	public Part(PartTyp p, int x, int y){
-		if(p == PartTyp.HEAD){
+	public Dot(DotTyp p, int x, int y){
+		if(p == DotTyp.HEAD){
 			this.setImage(new ImageIcon("src/Icons/head.gif").getImage());
 		}else{
 			this.setImage(new ImageIcon("src/Icons/dot.gif").getImage());
@@ -82,7 +82,7 @@ public class Part extends ImageIcon {
 	/**
 	 * @return the typ
 	 */
-	public PartTyp getTyp() {
+	public DotTyp getTyp() {
 		return typ;
 	}
 
