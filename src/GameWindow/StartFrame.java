@@ -12,6 +12,11 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+/**
+ * The start frame of the application
+ * @author stang
+ *
+ */
 public class StartFrame extends JFrame{
 	
 	JPanel panel= null;

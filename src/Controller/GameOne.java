@@ -2,6 +2,11 @@ package Controller;
 
 import GameWindow.StartFrame;
 
+/**
+ * This is the starting point of the application
+ * @author stang
+ *
+ */
 public class GameOne {
 
 	

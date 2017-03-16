@@ -5,6 +5,12 @@ import java.util.List;
 
 import GameWindow.Direction;
 
+/**
+ * This is the Snake
+ * A Snake has several parts. (One head and multiple body parts)
+ * @author stang
+ *
+ */
 public class Snake {
 	
 	private final int startLength = 3;
@@ -13,6 +19,9 @@ public class Snake {
 	
 	private List<Part> parts = null;
 	
+	/**
+	 * Creates a snake given by the default length
+	 */
 	public Snake(){
 		parts = new ArrayList<Part>();
 		
@@ -26,7 +35,10 @@ public class Snake {
 		}
 	}
 
-	
+	/**
+	 * moves the snake in the given direction.
+	 * @param d the direction the snake is moving
+	 */
 	public void moveSnake(Direction d){
 		for(int z = length-1; z > 0; z--){
 			parts.get(z).setLocX(parts.get(z-1).getLocX());

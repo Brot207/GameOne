@@ -16,6 +16,11 @@ import javax.swing.Timer;
 import GameObjects.Part;
 import GameObjects.Snake;
 
+/**
+ * This is the Game Panel
+ * @author stang
+ *
+ */
 public class GamePanel extends JPanel implements ActionListener {
 	
 	private Snake snake = null;
@@ -35,6 +40,10 @@ public class GamePanel extends JPanel implements ActionListener {
     private Timer timer;
     private Image part;
 	
+    /**
+     * The Panel in which the game is running.
+     * @param s the snake on the panel
+     */
 	public GamePanel(Snake s){
 		this.snake = s;
 		
@@ -56,7 +65,10 @@ public class GamePanel extends JPanel implements ActionListener {
 		doDrawing(g);
 	}
 	
-	
+	/**
+	 * Drwas the snake and other things
+	 * @param g
+	 */
 	private void doDrawing(Graphics g) {
 	        
 		if(inGame) {
@@ -77,6 +89,10 @@ public class GamePanel extends JPanel implements ActionListener {
         }        
 	}
 	
+	/**
+	 * Moves the Gameobjects on the panel.
+	 * The snake gets the current direction because it has to move constantly.
+	 */
 	private void move(){
 		this.snake.moveSnake(direction);
 	}
@@ -93,7 +109,11 @@ public class GamePanel extends JPanel implements ActionListener {
 		
 	}
 	
-	
+	/**
+	 * The key listener of the panel
+	 * @author stang
+	 *
+	 */
 	private class TAdapter extends KeyAdapter{
 		
 		@Override

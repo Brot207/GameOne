@@ -2,6 +2,11 @@ package GameObjects;
 
 import javax.swing.ImageIcon;
 
+/**
+ * This is one part of the snake.
+ * @author stang
+ *
+ */
 public class Part extends ImageIcon {
 	
 	ImageIcon icon = null;
@@ -10,14 +15,23 @@ public class Part extends ImageIcon {
 	private int locX;
 	private int locY;
 	
-
+	/**
+	 * Sets the part Image and the parts location on the panel given by x and y coordinates. 
+	 * @param x The x coordinate
+	 * @param y The y coordinate
+	 */
 	public Part(int x, int y){
 		this.setImage(new ImageIcon("src/Icons/dot.gif").getImage()); 
 		locX = x;
 		locY = y;
 	}
 	
-	
+	/**
+	 * creates a part given by the part type (head or body part) and sets its location on the panel given by x and y coordinates. 
+	 * @param p the part type
+	 * @param x The x coordinate
+	 * @param y The y coordinate
+	 */
 	public Part(PartTyp p, int x, int y){
 		if(p == PartTyp.HEAD){
 			this.setImage(new ImageIcon("src/Icons/head.gif").getImage());

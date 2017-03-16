@@ -9,6 +9,12 @@ import javax.swing.JPanel;
 
 import Controller.GameController;
 
+/**
+ * The start button on the start panel.
+ * The game will be started after pressing this button.
+ * @author stang
+ *
+ */
 public class StartButton  extends JButton{
 	
 	public StartButton(JPanel p){
@@ -17,6 +23,7 @@ public class StartButton  extends JButton{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				//starts the game
 				GameController.getInstance().gameLoop();
 				
 			}

@@ -2,6 +2,11 @@ package GameObjects;
 
 import javax.swing.ImageIcon;
 
+/**
+ * The head of the snake
+ * @author stang
+ *
+ */
 public class Head extends Part{
 
 	
