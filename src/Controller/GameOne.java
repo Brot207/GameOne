@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 
 import GameObjects.Snake;
+import GameWindow.GameFrame;
 import GameWindow.GamePanel;
 import GameWindow.StartFrame;
 
@@ -21,6 +22,7 @@ public class GameOne {
 	private static GameOne instance = null;
 	
 	private static JFrame startFrame = null;
+	private static JFrame gameFrame = null;
 	
 	private GameOne(){
 		
@@ -51,15 +53,9 @@ public class GameOne {
 			@Override
 			public void run() {
 				//creates the Frame where our game panel will fit in.
-				JFrame f = new JFrame();
-				f.add(new GamePanel(snake));
-				f.setResizable(false);
-				f.pack();
-				f.setTitle("GameOne -- SnakeAdvanced");
-				f.setLocationRelativeTo(null);
-				f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		        
-				f.setVisible(true);
+				gameFrame = new GameFrame(new GamePanel(snake));
+				gameFrame.setVisible(true);
+				
 				System.out.println("game has started");
 				
 			}
@@ -71,15 +67,20 @@ public class GameOne {
 	 * Starts the game
 	 */
 	public void initGame(){
-		hideStartFrame();
+		switchStartFrame();
 		gameLoop();
 	}
 	
 	/**
 	 * hides the start Frame
 	 */
-	public void hideStartFrame() {
-		startFrame.setVisible(false);
+	public void switchStartFrame() {
+		if(startFrame.isVisible()) {
+			startFrame.setVisible(false);
+		}else{
+			startFrame.setVisible(true);
+			gameFrame.dispose();
+		}
 	}
 
 	//Just for startup

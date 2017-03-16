@@ -13,6 +13,7 @@ import java.awt.event.KeyEvent;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
+import Controller.GameOne;
 import GameObjects.Part;
 import GameObjects.Snake;
 
@@ -85,7 +86,7 @@ public class GamePanel extends JPanel implements ActionListener {
 
         }else {
 
-            //gameOver(g);
+            GameOne.getInstance().switchStartFrame();
         }        
 	}
 	
@@ -138,7 +139,9 @@ public class GamePanel extends JPanel implements ActionListener {
 	        	direction = Direction.DOWN;
 	        }
 	        
-//	        if(key == KeyEvent.)
+	        if(key == KeyEvent.VK_SPACE){
+	        	inGame = false;
+	        }
 	    }
 	}
 }
