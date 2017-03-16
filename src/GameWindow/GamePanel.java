@@ -174,6 +174,7 @@ public class GamePanel extends JPanel implements ActionListener {
 	        if(key == KeyEvent.VK_ESCAPE) {
 	        	if(timer.isRunning()) {
 	        		System.out.println("Game stopped");
+	        		System.out.println("*********************************************************************************");
 	        		inGame = false;
 	        	}
 	        }

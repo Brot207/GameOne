@@ -16,11 +16,13 @@ public class OptionButton  extends JButton{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				
 				Random rn = new Random();
 				int r = rn.nextInt(255);
 				int g = rn.nextInt(255);
 				int b = rn.nextInt(255);
 				
+				System.out.println("Changed Backgroundcolor: r:" + r + " | g:" + g + " | b:" + b);
 				p.setBackground(new Color(r, g, b));
 				
 			}
