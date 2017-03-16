@@ -7,6 +7,8 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+import Controller.GameController;
+
 public class StartButton  extends JButton{
 	
 	public StartButton(JPanel p){
@@ -15,7 +17,7 @@ public class StartButton  extends JButton{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				p.setBackground(new Color(100, 10, 10));
+				GameController.getInstance().gameLoop();
 				
 			}
 		});

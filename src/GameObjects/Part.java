@@ -2,7 +2,7 @@ package GameObjects;
 
 import javax.swing.ImageIcon;
 
-public class Part {
+public class Part extends ImageIcon {
 	
 	ImageIcon icon = null;
 	PartTyp typ = null;
@@ -10,23 +10,25 @@ public class Part {
 	private int locX;
 	private int locY;
 	
+
+	public Part(int x, int y){
+		this.setImage(new ImageIcon("src/Icons/dot.gif").getImage()); 
+		locX = x;
+		locY = y;
+	}
+	
+	
 	public Part(PartTyp p, int x, int y){
 		if(p == PartTyp.HEAD){
-			icon = new ImageIcon("head.png");
+			this.setImage(new ImageIcon("src/Icons/head.gif").getImage());
 		}else{
-			icon = new ImageIcon("dot.png");
+			this.setImage(new ImageIcon("src/Icons/dot.gif").getImage());
 		}
 		
 		locX = x;
 		locY = y;
 	}
 
-	public Part(int x, int y){
-		icon = new ImageIcon("dot.png");
-		
-		locX = x;
-		locY = y;
-	}
 	
 	/**
 	 * @return the locX
