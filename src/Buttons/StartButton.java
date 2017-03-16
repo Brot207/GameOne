@@ -7,7 +7,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-import Controller.GameController;
+import Controller.GameOne;
 
 /**
  * The start button on the start panel.
@@ -24,7 +24,7 @@ public class StartButton  extends JButton{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				//starts the game
-				GameController.getInstance().gameLoop();
+				GameOne.getInstance().initGame();
 				
 			}
 		});

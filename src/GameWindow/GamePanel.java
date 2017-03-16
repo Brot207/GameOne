@@ -103,6 +103,7 @@ public class GamePanel extends JPanel implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		if(inGame){
 			this.move();
+			System.out.println("game is running");
 		}
 		
 		repaint();
