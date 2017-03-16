@@ -139,7 +139,13 @@ public class GamePanel extends JPanel implements ActionListener {
 	        	direction = Direction.DOWN;
 	        }
 	        
-	        if(key == KeyEvent.VK_SPACE){
+	        if(key == KeyEvent.VK_SPACE) {
+	        
+	        	if(timer.isRunning()) timer.stop();
+	        	else timer.restart();
+	        }
+	        
+	        if(key == KeyEvent.VK_ESCAPE) {
 	        	inGame = false;
 	        }
 	    }
