@@ -31,11 +31,11 @@ public class Snake {
 		
 		for(int x = 0; x < startLength; x++){
 			if(x == 0){
-				parts.add(new HeadDot(50, 50));
+				parts.add(new HeadDot(300, 300));
 				continue;
 			}
 			
-			parts.add(new Dot(50 - x*dotSize, 50));
+			parts.add(new Dot(300 - x*dotSize, 300));
 		}
 	}
 
@@ -79,6 +79,10 @@ public class Snake {
 		}
 		
 		return null;
+	}
+	
+	public Dot getLastPart(){
+		return this.parts.get(length-1);
 	}
 	
 	/**

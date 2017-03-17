@@ -37,6 +37,9 @@ public class GameOne {
 	private int pHEIGHT = 600;
 	private int pWIDTH = 800;
 	
+	private int[][] collisionMatrix;
+	private int[][] correctionMatrix;
+	
 	private Snake snake;
 	private List<Dot> otherParts = null;
 	
@@ -91,6 +94,8 @@ public class GameOne {
 		gameLoop();
 	}
 	
+	
+	
 	/**
 	 * hides the start Frame
 	 */
@@ -104,18 +109,30 @@ public class GameOne {
 	}
 	
 	public void doDrawingOnGamePanel(Graphics g){
+
+		this.collisionMatrix = new int[this.pWIDTH+1][this.pHEIGHT+1];
 		
 		otherParts = new ArrayList<Dot>();
 		otherParts.add(new Dot(DotTyp.HEAD, 100, 100));
-
+		
+		boolean head = true;
+		
         for (Dot d: snake.getParts()) {
             Image dot = d.getImage();
+            if(head){
+            	this.collisionMatrix[d.getLocX()][d.getLocY()] = 3;
+            	 g.drawImage(dot, d.getLocX(), d.getLocY(), gamePanel);
+            	head = false;
+            	continue;
+            }
+            this.collisionMatrix[d.getLocX()][d.getLocY()] = 2;
             g.drawImage(dot, d.getLocX(), d.getLocY(), gamePanel);
         }
         
         if(otherParts != null){
 	        for(Dot d: otherParts){
 	        	Image dot = d.getImage();
+	        	this.collisionMatrix[d.getLocX()][d.getLocY()] = 1;
 	        	 g.drawImage(dot, d.getLocX(), d.getLocY(), gamePanel);
 	        }
         }
@@ -129,23 +146,14 @@ public class GameOne {
 	public boolean checkCollision(){
 		Dot head = this.snake.getHead();
 		
-		for(int x = 1; x < snake.getLength(); x++){
-			if(head.getLocX() == snake.getPart_i(x).getLocX() && head.getLocY() == snake.getPart_i(x).getLocY()){
-				return !true;
-			}
+		if(this.collisionMatrix[head.getLocX()][head.getLocY()] != 0 && this.collisionMatrix[head.getLocX()][head.getLocY()] != 3){
+			System.out.println(this.collisionMatrix[head.getLocX()][head.getLocY()]);
+			
+			return !true;
 		}
-		
-		if(otherParts != null){
-			for(Dot d: otherParts){
-				if(head.getLocX() == d.getLocX() && head.getLocY() == d.getLocY()){
-					return !true;
-				}
-			}
-		}
-		
 		
 		return !false;
-		
+	
 	}
 	
 
