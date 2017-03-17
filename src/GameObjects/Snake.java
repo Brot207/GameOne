@@ -73,6 +73,13 @@ public class Snake {
 	}
 	
 	
+	public Dot getHead(){
+		if(length > 0){
+			return getPart_i(0);
+		}
+		
+		return null;
+	}
 	
 	/**
 	 * @return the length
@@ -109,6 +116,14 @@ public class Snake {
 		return parts.get(i);
 	}
 	
+	
+	/**
+	 * @return the parts
+	 */
+	public List<Dot> getParts() {
+		return parts;
+	}
+
 	/**
 	 * @param pWIDTH the pWIDTH to set
 	 */

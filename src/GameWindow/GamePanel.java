@@ -9,6 +9,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JPanel;
 import javax.swing.Timer;
@@ -27,30 +29,24 @@ public class GamePanel extends JPanel implements ActionListener {
 	
 	private Snake snake = null;
 	
-	private int HEIGHT = 600;
-	private int WIDTH = 800;
+	private int HEIGHT;
+	private int WIDTH;
 	
-	private int dotSize = 10;
 	private int DELAY = 140;
-	private int dotCount = 0;
-	
-	private final int ALLDOTS = (HEIGHT*WIDTH)/(dotSize*dotSize);
 	
 	private Direction direction = Direction.RIGHT;
     private boolean inGame = true;
 	
     private Timer timer;
     private int timerTickCount = 0;
-    private Image part;
 	
     /**
      * The Panel in which the game is running.
      * @param s the snake on the panel
      */
-	public GamePanel(Snake s){
-		this.snake = s;
-		this.snake.setpWIDTH(this.WIDTH);
-		this.snake.setpHEIGHT(this.HEIGHT);
+	public GamePanel(int h, int w){
+		this.HEIGHT = h;
+		this.WIDTH = w;
 		
 		addKeyListener(new TAdapter());
 		setBackground(Color.black);
@@ -78,39 +74,37 @@ public class GamePanel extends JPanel implements ActionListener {
 	        
 		if(inGame) {
 
-			this.dotCount = snake.getLength();
-			
-			g.drawImage(new Dot(DotTyp.HEAD, 100, 100).getImage(), 100, 100, this);
-
-            for (int z = 0; z < this.dotCount; z++) {
-                Dot p = snake.getPart_i(z);
-                part = p.getImage();
-                g.drawImage(part, p.getLocX(), p.getLocY(), this);
-            }
-
+			GameOne.getInstance().doDrawingOnGamePanel(g);
             Toolkit.getDefaultToolkit().sync();
 
         }else {
-
+        	System.out.println("Game stopped");
+    		System.out.println("*********************************************************************************");
             GameOne.getInstance().switchStartFrame();
         }        
 	}
-	
-	/**
-	 * Moves the Gameobjects on the panel.
-	 * The snake gets the current direction because it has to move constantly.
-	 */
-	private void move(){
-		this.snake.moveSnake(direction);
-	}
-	
-	
 	
 	/**
 	 * @return the hEIGHT
 	 */
 	public int getHEIGHT() {
 		return HEIGHT;
+	}
+
+
+	/**
+	 * @return the inGame
+	 */
+	public boolean isInGame() {
+		return inGame;
+	}
+
+
+	/**
+	 * @param inGame the inGame to set
+	 */
+	public void setInGame(boolean inGame) {
+		this.inGame = inGame;
 	}
 
 
@@ -126,7 +120,7 @@ public class GamePanel extends JPanel implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		if(inGame){
 			timerTickCount += 1;
-			this.move();
+			GameOne.getInstance().move(direction);
 			System.out.println(timerTickCount + "   game is running");
 		}
 		
@@ -173,8 +167,6 @@ public class GamePanel extends JPanel implements ActionListener {
 	        
 	        if(key == KeyEvent.VK_ESCAPE) {
 	        	if(timer.isRunning()) {
-	        		System.out.println("Game stopped");
-	        		System.out.println("*********************************************************************************");
 	        		inGame = false;
 	        	}
 	        }
