@@ -90,6 +90,10 @@ public class GameOne {
 		gameLoopInit();
 	}
 	
+	/**
+	 * creates the snake and other parts like walls and appels.
+	 * creates the collison handler .
+	 */
 	public void loadGame(){
 		//creates the snake
 		snake = new Snake();
@@ -116,6 +120,16 @@ public class GameOne {
 		}
 	}
 	
+	/**
+	 * Draws all the Game Objects on the game Panel.
+	 * It also sets the collision matrix.
+	 * ABOUT THE COLLISION MATRIX:
+	 * -int[panel width][panel height]
+	 * - if entry ij == 0 ==> no game object on the panel at x = i and y = j
+	 * - if entry is < 0 ==> there is a wall or apple
+	 * - if entry > 0 ==> there is the snake
+	 * @param g
+	 */
 	public void doDrawingOnGamePanel(Graphics g){
 
 		this.collisionMatrix = new int[this.pWIDTH+1][this.pHEIGHT+1];
@@ -144,12 +158,22 @@ public class GameOne {
         }
 	}
 	
+	/**
+	 * Moves the snake and gives the collision handler the new collision matrix 
+	 * and the the snake.
+	 * @param d The direction in which  the snake is moving
+	 */
 	public void move(Direction d){
 		this.snake.moveSnake(d);
 		collisionHandler.setGameStats(this.collisionMatrix, this.snake);
 		gamePanel.setInGame(collisionHandler.checkCollison());
 	}
 	
+	/**
+	 * sets the game stats:
+	 * @param snake The new snake
+	 * @param parts all the other parts
+	 */
 	public void setGameStats(Snake snake, List<Dot> parts){
 		this.snake = snake;
 		this.otherParts = parts;

@@ -7,6 +7,12 @@ import GameObjects.Dot;
 import GameObjects.DotTyp;
 import GameObjects.Snake;
 
+/**
+ * This is the collision handler.
+ * He checks if there is an collision and also reacts to it
+ * @author Stang
+ *
+ */
 public class CollisionHandler {
 	
 	private List<Snake> snakes = null;
@@ -16,6 +22,11 @@ public class CollisionHandler {
 	private boolean collison = !false;
 	private int[][] collisionMatrix;
 	
+	
+	/**
+	 * constructor
+	 * @param otherParts all the parts but the snake
+	 */
 	public CollisionHandler(List<Dot> otherParts){
 		this.otherParts = new ArrayList<Dot>();
 		
@@ -23,7 +34,10 @@ public class CollisionHandler {
 	}
 	
 	
-	
+	/**
+	 * checks if there is an collision and decides what to do.
+	 * @return !false if there is no collision || !true if there is an collison
+	 */
 	public boolean checkCollison(){
 		Dot head = this.snake.getHead();
 		int indexToCheck = this.collisionMatrix[head.getLocX()][head.getLocY()];

@@ -41,7 +41,7 @@ public class Snake {
 	}
 
 	/**
-	 * Creates a snake given by the default length
+	 * Creates a snake given by the default length at an starting point
 	 */
 	public Snake(int startPosition){
 		parts = new ArrayList<Dot>();
@@ -90,6 +90,10 @@ public class Snake {
 		
 	}
 	
+	/**
+	 * adds one part to the snake and sets the new length
+	 * @param d the dot that will be added to the snake
+	 */
 	public void expandSnake(Dot d){
 		parts.add(d);
 		this.length = parts.size();
