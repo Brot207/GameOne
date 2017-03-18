@@ -13,7 +13,7 @@ import GameWindow.Direction;
  */
 public class Snake {
 	
-	private final int startLength = 10;
+	private final int startLength = 1;
 	private int length = startLength;
 	private int dotSize = 10;
 	
@@ -22,6 +22,7 @@ public class Snake {
 	
 	
 	private List<Dot> parts = null;
+	private List<Dot> bullets = null;
 	
 	/**
 	 * Creates a snake given by the default length
@@ -39,6 +40,23 @@ public class Snake {
 		}
 	}
 
+	/**
+	 * Creates a snake given by the default length
+	 */
+	public Snake(int startPosition){
+		parts = new ArrayList<Dot>();
+		
+		for(int x = 0; x < startLength; x++){
+			if(x == 0){
+				parts.add(new HeadDot(startPosition, startPosition));
+				continue;
+			}
+			
+			parts.add(new Dot(startPosition - x*dotSize, startPosition));
+		}
+	}
+	
+	
 	/**
 	 * moves the snake in the given direction.
 	 * @param d the direction the snake is moving
@@ -69,6 +87,12 @@ public class Snake {
         	if(parts.get(0).getLocY() >= pHEIGHT) parts.get(0).setLocY(0);
         	else parts.get(0).setLocY( parts.get(0).getLocY() + dotSize);
         }
+		
+	}
+	
+	public void expandSnake(Dot d){
+		parts.add(d);
+		this.length = parts.size();
 		
 	}
 	

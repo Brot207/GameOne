@@ -28,6 +28,7 @@ import GameWindow.StartFrame;
 public class GameOne {
 	
 	private static GameOne instance = null;
+	private static CollisionHandler collisionHandler= null;
 	
 	private static JFrame startFrame = null;
 	private static JFrame gameFrame = null;
@@ -38,7 +39,6 @@ public class GameOne {
 	private int pWIDTH = 800;
 	
 	private int[][] collisionMatrix;
-	private int[][] correctionMatrix;
 	
 	private Snake snake;
 	private List<Dot> otherParts = null;
@@ -63,7 +63,7 @@ public class GameOne {
 	 * The actual game loop.
 	 * This is where the game is running once it's started. 
 	 */
-	public void gameLoop(){
+	public void gameLoopInit(){
         
         EventQueue.invokeLater(new Runnable() {
 
@@ -85,16 +85,24 @@ public class GameOne {
 	 * Starts the game
 	 */
 	public void initGame(){
+		loadGame();
+		switchStartFrame();
+		gameLoopInit();
+	}
+	
+	public void loadGame(){
 		//creates the snake
 		snake = new Snake();
 		this.snake.setpWIDTH(this.pWIDTH);
 		this.snake.setpHEIGHT(this.pHEIGHT);
 		
-		switchStartFrame();
-		gameLoop();
+		otherParts = new ArrayList<Dot>();
+		otherParts.add(new Dot(DotTyp.HEAD, 100, 100));
+		otherParts.add(new Dot(DotTyp.APPLE, 200, 100));
+		
+		collisionHandler = new CollisionHandler(this.otherParts);
+		
 	}
-	
-	
 	
 	/**
 	 * hides the start Frame
@@ -112,27 +120,25 @@ public class GameOne {
 
 		this.collisionMatrix = new int[this.pWIDTH+1][this.pHEIGHT+1];
 		
-		otherParts = new ArrayList<Dot>();
-		otherParts.add(new Dot(DotTyp.HEAD, 100, 100));
-		
 		boolean head = true;
 		
         for (Dot d: snake.getParts()) {
             Image dot = d.getImage();
             if(head){
-            	this.collisionMatrix[d.getLocX()][d.getLocY()] = 3;
+            	this.collisionMatrix[d.getLocX()][d.getLocY()] = 1;
             	 g.drawImage(dot, d.getLocX(), d.getLocY(), gamePanel);
             	head = false;
             	continue;
             }
-            this.collisionMatrix[d.getLocX()][d.getLocY()] = 2;
+            this.collisionMatrix[d.getLocX()][d.getLocY()] = 1;
             g.drawImage(dot, d.getLocX(), d.getLocY(), gamePanel);
         }
         
         if(otherParts != null){
-	        for(Dot d: otherParts){
+	        for(int z = 0; z < otherParts.size(); z++){
+	        	Dot d = otherParts.get(z);
 	        	Image dot = d.getImage();
-	        	this.collisionMatrix[d.getLocX()][d.getLocY()] = 1;
+	        	this.collisionMatrix[d.getLocX()][d.getLocY()] = -(z+1);
 	        	 g.drawImage(dot, d.getLocX(), d.getLocY(), gamePanel);
 	        }
         }
@@ -140,23 +146,15 @@ public class GameOne {
 	
 	public void move(Direction d){
 		this.snake.moveSnake(d);
-		gamePanel.setInGame(checkCollision());
+		collisionHandler.setGameStats(this.collisionMatrix, this.snake);
+		gamePanel.setInGame(collisionHandler.checkCollison());
 	}
 	
-	public boolean checkCollision(){
-		Dot head = this.snake.getHead();
-		
-		if(this.collisionMatrix[head.getLocX()][head.getLocY()] != 0 && this.collisionMatrix[head.getLocX()][head.getLocY()] != 3){
-			System.out.println(this.collisionMatrix[head.getLocX()][head.getLocY()]);
-			
-			return !true;
-		}
-		
-		return !false;
-	
+	public void setGameStats(Snake snake, List<Dot> parts){
+		this.snake = snake;
+		this.otherParts = parts;
 	}
 	
-
 	//Just for startup
 	public static void main(String[] args) {
 		System.out.println("*******************************Application started*******************************");

@@ -35,8 +35,10 @@ public class Dot extends ImageIcon {
 	public Dot(DotTyp p, int x, int y){
 		if(p == DotTyp.HEAD){
 			this.setImage(new ImageIcon("src/Icons/head.gif").getImage());
+			this.typ = p;
 		}else{
 			this.setImage(new ImageIcon("src/Icons/dot.gif").getImage());
+			this.typ = p;
 		}
 		
 		locX = x;
@@ -44,6 +46,13 @@ public class Dot extends ImageIcon {
 	}
 
 	
+	/**
+	 * @param typ the typ to set
+	 */
+	public void setTyp(DotTyp typ) {
+		this.typ = typ;
+	}
+
 	/**
 	 * @return the locX
 	 */

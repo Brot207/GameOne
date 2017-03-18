@@ -2,6 +2,7 @@ package GameObjects;
 
 public enum DotTyp {
 	HEAD,
-	BODYPART;
+	BODYPART,
+	APPLE;
 
 }
