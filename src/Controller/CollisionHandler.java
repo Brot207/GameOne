@@ -2,6 +2,7 @@ package Controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import GameObjects.Dot;
 import GameObjects.DotTyp;
@@ -49,7 +50,7 @@ public class CollisionHandler {
 				apple.setTyp(DotTyp.BODYPART);
 				this.snake.expandSnake(apple);
 				otherParts.remove(indexToCheck);
-				System.out.println(otherParts.size());
+				generateNewApple();
 				GameOne.getInstance().setGameStats(this.snake, this.otherParts);
 				return !false;
 			}
@@ -62,7 +63,32 @@ public class CollisionHandler {
 	
 	}
 	
-	
+	public void generateNewApple(){
+		int width = this.snake.getpWIDTH() / 10;
+		int height = this.snake.getpHEIGHT() / 10;
+		
+		Random rn = new Random();
+		
+		boolean newApple = false;
+		
+		while(!newApple){
+			int x = rn.nextInt(width) * 10 ;
+			int y = rn.nextInt(height) * 10;
+			
+			if(this.collisionMatrix[x][y] != 0){
+				continue;
+			}
+			
+			Dot apple = new Dot(DotTyp.APPLE, x, y);
+			otherParts.add(apple);
+			newApple = true;
+		}
+		
+
+		
+		
+
+	}
 	
 	public void setGameStats(int[][] collision, Snake snake){
 		this.collisionMatrix = collision;

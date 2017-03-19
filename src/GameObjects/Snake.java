@@ -109,6 +109,21 @@ public class Snake {
 		return null;
 	}
 	
+	
+	/**
+	 * @return the pWIDTH
+	 */
+	public int getpWIDTH() {
+		return pWIDTH;
+	}
+
+	/**
+	 * @return the pHEIGHT
+	 */
+	public int getpHEIGHT() {
+		return pHEIGHT;
+	}
+
 	public Dot getLastPart(){
 		return this.parts.get(length-1);
 	}
