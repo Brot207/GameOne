@@ -13,7 +13,7 @@ import GameWindow.Direction;
  */
 public class Snake {
 	
-	private final int startLength = 1;
+	private final int startLength = 3;
 	private int length = startLength;
 	private int dotSize = 10;
 	

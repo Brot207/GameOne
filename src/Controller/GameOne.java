@@ -1,5 +1,6 @@
 package Controller;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Graphics;
@@ -75,6 +76,7 @@ public class GameOne {
 
 				
 				gameFrame = new GameFrame(gamePanel);
+				gameFrame.setAlwaysOnTop(true);
 				gameFrame.setVisible(true);
 				System.out.println("*********************************************************************************");
 				System.out.println("Game has started");
@@ -111,6 +113,11 @@ public class GameOne {
 		
 	}
 	
+	public void showStart(){
+		startFrame.setVisible(!startFrame.isVisible());
+		gameFrame.setVisible(true);
+	}
+	
 	/**
 	 * hides the start Frame
 	 */
@@ -134,6 +141,8 @@ public class GameOne {
 	 * @param g
 	 */
 	public void doDrawingOnGamePanel(Graphics g){
+		g.setColor(Color.LIGHT_GRAY);
+		g.drawString("Snake length:   " + this.snake.getLength(), 10, 35);
 
 		this.collisionMatrix = new int[this.pWIDTH+1][this.pHEIGHT+1];
 		

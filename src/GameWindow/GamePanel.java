@@ -59,14 +59,10 @@ public class GamePanel extends JPanel implements ActionListener {
 	@Override 
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
-		if(!timer.isRunning()){
-			
-			g.drawString("paused", 10, 30);
-		}
 		
 		doDrawing(g);
-		g.setColor(Color.WHITE);;
-		g.drawString(timerTickCount + "    game is running", 10, 20);
+		g.setColor(Color.LIGHT_GRAY);
+		g.drawString("game is running     " + timerTickCount, 10, 20);
 		
 	}
 	
@@ -88,11 +84,20 @@ public class GamePanel extends JPanel implements ActionListener {
         }        
 	}
 	
+	
 	/**
 	 * @return the hEIGHT
 	 */
 	public int getHEIGHT() {
 		return HEIGHT;
+	}
+
+
+	/**
+	 * @return the timer
+	 */
+	public Timer getTimer() {
+		return timer;
 	}
 
 
@@ -164,8 +169,10 @@ public class GamePanel extends JPanel implements ActionListener {
 	        	if(timer.isRunning()) {
 	        		timer.stop();
 	        		System.out.println("*****   Game paused");
+	        		GameOne.getInstance().showStart();
 	        	}else {
 	        		System.out.println("*****   Game restarted");
+	        		GameOne.getInstance().showStart();
 	        		timer.restart();
 	        	}
 	        }
