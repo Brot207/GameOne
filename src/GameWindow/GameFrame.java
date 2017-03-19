@@ -3,6 +3,10 @@
  */
 package GameWindow;
 
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+
+import javax.swing.GroupLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -13,7 +17,9 @@ import javax.swing.JPanel;
 public class GameFrame extends JFrame {
 	
 	public GameFrame(JPanel p){
-		add(p);
+		
+		
+		add(p, BorderLayout.CENTER);
 		setResizable(false);
 		pack();
 		

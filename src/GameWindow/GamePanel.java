@@ -9,6 +9,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
+import javax.swing.GroupLayout;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -35,6 +37,7 @@ public class GamePanel extends JPanel implements ActionListener {
     private Timer timer;
     private int timerTickCount = 0;
 	
+    public  Graphics gr;
     /**
      * The Panel in which the game is running.
      * @param s the snake on the panel
@@ -46,7 +49,6 @@ public class GamePanel extends JPanel implements ActionListener {
 		addKeyListener(new TAdapter());
 		setBackground(Color.black);
 		setFocusable(true);
-		
 		setPreferredSize(new Dimension(WIDTH, HEIGHT));
 		
 		timer = new Timer(DELAY, this);
@@ -57,8 +59,15 @@ public class GamePanel extends JPanel implements ActionListener {
 	@Override 
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
+		if(!timer.isRunning()){
+			
+			g.drawString("paused", 10, 30);
+		}
 		
 		doDrawing(g);
+		g.setColor(Color.WHITE);;
+		g.drawString(timerTickCount + "    game is running", 10, 20);
+		
 	}
 	
 	/**
@@ -115,8 +124,9 @@ public class GamePanel extends JPanel implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		if(inGame){
 			timerTickCount += 1;
+			System.out.println(timerTickCount + "    game is running");
 			GameOne.getInstance().move(direction);
-			System.out.println(timerTickCount + "   game is running");
+			
 		}
 		
 		repaint();

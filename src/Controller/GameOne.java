@@ -1,5 +1,6 @@
 package Controller;
 
+import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -71,6 +72,8 @@ public class GameOne {
 			public void run() {
 				//creates the Frame where our game panel will fit in.
 				gamePanel = new GamePanel(pHEIGHT, pWIDTH);
+
+				
 				gameFrame = new GameFrame(gamePanel);
 				gameFrame.setVisible(true);
 				System.out.println("*********************************************************************************");
