@@ -3,6 +3,7 @@ package Controller;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.EventQueue;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.util.ArrayList;
@@ -115,6 +116,10 @@ public class GameOne {
 	
 	public void showStart(){
 		startFrame.setVisible(!startFrame.isVisible());
+		Graphics g = gameFrame.getGraphics();
+		g.setColor(Color.orange);
+		g.setFont(new Font("TimesRoman", Font.PLAIN, 30));
+		g.drawString("Game paused", (this.pWIDTH/2) - 70, this.pHEIGHT/2);
 		gameFrame.setVisible(true);
 	}
 	

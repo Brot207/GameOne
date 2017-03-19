@@ -169,6 +169,7 @@ public class GamePanel extends JPanel implements ActionListener {
 	        	if(timer.isRunning()) {
 	        		timer.stop();
 	        		System.out.println("*****   Game paused");
+	        		
 	        		GameOne.getInstance().showStart();
 	        	}else {
 	        		System.out.println("*****   Game restarted");
