@@ -63,6 +63,9 @@ public class GamePanel extends JPanel implements ActionListener {
 		doDrawing(g);
 		g.setColor(Color.LIGHT_GRAY);
 		g.drawString("game is running     " + timerTickCount, 10, 20);
+		float pxs = (float) ((1000.0/(float)DELAY)*10.0);
+		pxs = Math.round(pxs*1000.0);
+		g.drawString(pxs/1000.0 + " px/s", 10, 50);
 		
 	}
 	
@@ -129,6 +132,16 @@ public class GamePanel extends JPanel implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		if(inGame){
 			timerTickCount += 1;
+			
+			//makes the snake faster over time 
+			if(timerTickCount % 200 == 0 && DELAY > 87){
+				timer.stop();
+				this.DELAY -= 1;
+				timer = new Timer(DELAY, this);
+				timer.start();
+				
+			}
+			
 			System.out.println(timerTickCount + "    game is running");
 			GameOne.getInstance().move(direction);
 			
@@ -169,7 +182,6 @@ public class GamePanel extends JPanel implements ActionListener {
 	        	if(timer.isRunning()) {
 	        		timer.stop();
 	        		System.out.println("*****   Game paused");
-	        		
 	        		GameOne.getInstance().showStart();
 	        	}else {
 	        		System.out.println("*****   Game restarted");
