@@ -1,6 +1,7 @@
 package Controller;
 
 import java.awt.Color;
+
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Font;
@@ -15,6 +16,9 @@ import javax.swing.JPanel;
 import GameObjects.Dot;
 import GameObjects.DotTyp;
 import GameObjects.Snake;
+//WALL
+import GameObjects.Wall;
+
 import GameWindow.Direction;
 import GameWindow.GameFrame;
 import GameWindow.GamePanel;
@@ -45,6 +49,9 @@ public class GameOne {
 	
 	private Snake snake;
 	private List<Dot> otherParts = null;
+	
+	//WALL
+	private Wall wall;
 	
 	private GameOne(){
 		
@@ -105,6 +112,9 @@ public class GameOne {
 		snake = new Snake();
 		this.snake.setpWIDTH(this.pWIDTH);
 		this.snake.setpHEIGHT(this.pHEIGHT);
+		
+		//WALL
+		wall = new Wall(280,280, 10, true);
 		
 		otherParts = new ArrayList<Dot>();
 		otherParts.add(new Dot(DotTyp.HEAD, 100, 100));
@@ -172,6 +182,19 @@ public class GameOne {
 	        	this.collisionMatrix[d.getLocX()][d.getLocY()] = -(z+1);
 	        	 g.drawImage(dot, d.getLocX(), d.getLocY(), gamePanel);
 	        }
+        }
+        
+        //WALL
+        Image imageWall = wall.getImage();
+        for (int i = 0; i < wall.getWallLenght(); i++) {
+        if (wall.getOrientation()) {
+        	this.collisionMatrix[wall.getLocX() + i*10][wall.getLocY()] = 1;
+        	g.drawImage(imageWall, wall.getLocX() + i*10, wall.getLocY(), gamePanel);
+        }
+        else {
+        	this.collisionMatrix[wall.getLocX()][wall.getLocY() + i*10] = 1;
+        	g.drawImage(imageWall, wall.getLocX(), wall.getLocY() + i*10, gamePanel);
+        }
         }
 	}
 	

@@ -16,6 +16,8 @@ import javax.swing.Timer;
 
 import Controller.GameOne;
 import GameObjects.Snake;
+//WALL
+import GameObjects.Wall;
 
 /**
  * This is the Game Panel
@@ -25,6 +27,9 @@ import GameObjects.Snake;
 public class GamePanel extends JPanel implements ActionListener {
 	
 	private Snake snake = null;
+	
+	//WALL
+	private Wall wall = null;
 	
 	private int HEIGHT;
 	private int WIDTH;
