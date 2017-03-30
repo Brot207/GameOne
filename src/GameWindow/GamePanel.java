@@ -2,6 +2,7 @@ package GameWindow;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -70,7 +71,7 @@ public class GamePanel extends JPanel implements ActionListener {
 		g.drawString("game is running     " + timerTickCount, 10, 20);
 		float pxs = (float) ((1000.0/(float)DELAY)*10.0);
 		pxs = Math.round(pxs*1000.0);
-		g.drawString(pxs/1000.0 + " px/s", 10, 50);
+		g.drawString((pxs/1000.0) / 2.0 + " px/s", 10, 50);
 		
 	}
 	
@@ -148,7 +149,7 @@ public class GamePanel extends JPanel implements ActionListener {
 			}
 			
 			System.out.println(timerTickCount + "    game is running");
-			GameOne.getInstance().move(direction);
+			GameOne.getInstance().move(direction, timerTickCount);
 			
 		}
 		
@@ -187,6 +188,10 @@ public class GamePanel extends JPanel implements ActionListener {
 	        	if(timer.isRunning()) {
 	        		timer.stop();
 	        		System.out.println("*****   Game paused");
+	        		Graphics g = getGraphics();
+	        		g.setColor(Color.orange);
+	        		g.setFont(new Font("TimesRoman", Font.PLAIN, 30));
+	        		g.drawString("Game paused", (WIDTH/2) - 70, HEIGHT/2);
 	        		GameOne.getInstance().showStart();
 	        	}else {
 	        		System.out.println("*****   Game restarted");

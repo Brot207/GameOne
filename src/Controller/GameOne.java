@@ -126,10 +126,6 @@ public class GameOne {
 	
 	public void showStart(){
 		startFrame.setVisible(!startFrame.isVisible());
-		Graphics g = gameFrame.getGraphics();
-		g.setColor(Color.orange);
-		g.setFont(new Font("TimesRoman", Font.PLAIN, 30));
-		g.drawString("Game paused", (this.pWIDTH/2) - 70, this.pHEIGHT/2);
 		gameFrame.setVisible(true);
 	}
 	
@@ -166,7 +162,7 @@ public class GameOne {
         for (Dot d: snake.getParts()) {
             Image dot = d.getImage();
             if(head){
-            	this.collisionMatrix[d.getLocX()][d.getLocY()] = 1;
+            	this.collisionMatrix[d.getLocX()][d.getLocY()] = 2;
             	 g.drawImage(dot, d.getLocX(), d.getLocY(), gamePanel);
             	head = false;
             	continue;
@@ -203,8 +199,8 @@ public class GameOne {
 	 * and the the snake.
 	 * @param d The direction in which  the snake is moving
 	 */
-	public void move(Direction d){
-		this.snake.moveSnake(d);
+	public void move(Direction d, int tick){
+		if(tick % 2 == 0) this.snake.moveSnake(d);
 		collisionHandler.setGameStats(this.collisionMatrix, this.snake);
 		gamePanel.setInGame(collisionHandler.checkCollison());
 	}

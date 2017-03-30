@@ -54,8 +54,10 @@ public class CollisionHandler {
 				GameOne.getInstance().setGameStats(this.snake, this.otherParts);
 				return !false;
 			}
+			
 			return !true;
 		}else if(indexToCheck > 0){
+			if(indexToCheck == 2) return !false;
 			return !true;
 		}
 		
