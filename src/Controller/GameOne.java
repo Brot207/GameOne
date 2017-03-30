@@ -13,6 +13,7 @@ import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import GameObjects.Bullet;
 import GameObjects.Dot;
 import GameObjects.DotTyp;
 import GameObjects.Snake;
@@ -158,16 +159,17 @@ public class GameOne {
 		this.collisionMatrix = new int[this.pWIDTH+1][this.pHEIGHT+1];
 		
 		boolean head = true;
-		
+		int count = 1;
         for (Dot d: snake.getParts()) {
+        	count += 1;
             Image dot = d.getImage();
             if(head){
             	this.collisionMatrix[d.getLocX()][d.getLocY()] = 2;
-            	 g.drawImage(dot, d.getLocX(), d.getLocY(), gamePanel);
+            	g.drawImage(dot, d.getLocX(), d.getLocY(), gamePanel);
             	head = false;
             	continue;
             }
-            this.collisionMatrix[d.getLocX()][d.getLocY()] = 1;
+            this.collisionMatrix[d.getLocX()][d.getLocY()] = count + 2;
             g.drawImage(dot, d.getLocX(), d.getLocY(), gamePanel);
         }
         
@@ -178,6 +180,12 @@ public class GameOne {
 	        	this.collisionMatrix[d.getLocX()][d.getLocY()] = -(z+1);
 	        	 g.drawImage(dot, d.getLocX(), d.getLocY(), gamePanel);
 	        }
+        }
+        
+        if(snake.getBullets() != null){
+        	for(Bullet b: snake.getBullets()){
+            	g.drawImage(b.getImage(), b.getLocX(), b.getLocY(), gamePanel);
+        	}
         }
         
         //WALL
@@ -200,11 +208,17 @@ public class GameOne {
 	 * @param d The direction in which  the snake is moving
 	 */
 	public void move(Direction d, int tick){
-		if(tick % 2 == 0) this.snake.moveSnake(d);
+		if(tick % 2 == 0){
+			this.snake.moveSnake(d);
+		}
+		this.snake.moveBullet();
 		collisionHandler.setGameStats(this.collisionMatrix, this.snake);
 		gamePanel.setInGame(collisionHandler.checkCollison());
 	}
 	
+	public void shoot(){
+		this.snake.createBullet();
+	}
 	/**
 	 * sets the game stats:
 	 * @param snake The new snake

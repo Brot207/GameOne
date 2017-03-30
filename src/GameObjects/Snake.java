@@ -20,9 +20,11 @@ public class Snake {
 	private int pWIDTH = 0;
 	private int pHEIGHT = 0;
 	
+	private Direction headingDirection;
+	
 	
 	private List<Dot> parts = null;
-	private List<Dot> bullets = null;
+	private List<Bullet> bullets = null;
 	
 	/**
 	 * Creates a snake given by the default length
@@ -62,7 +64,9 @@ public class Snake {
 	 * @param d the direction the snake is moving
 	 */
 	public void moveSnake(Direction d){
+		this.headingDirection = d;
 		for(int z = length-1; z > 0; z--){
+			parts.get(z).setTyp(DotTyp.BODYPART);
 			parts.get(z).setLocX(parts.get(z-1).getLocX());
 			parts.get(z).setLocY(parts.get(z-1).getLocY());
 		}
@@ -90,14 +94,60 @@ public class Snake {
 		
 	}
 	
+	public void moveBullet(){
+		if(this.bullets != null){
+			for(int x = 0; x < this.bullets.size(); x++){
+				Bullet b = this.bullets.get(x);
+				Direction bulletDirection = b.getMovingDirection();
+				if (bulletDirection == Direction.LEFT) {
+					if(b.getLocX() <= 0) this.bullets.remove(b);
+					else b.moveBullet();
+		        }
+		
+		        if (bulletDirection == Direction.RIGHT) {
+					if(b.getLocX() >= pWIDTH) this.bullets.remove(b);
+					else b.moveBullet();
+		        }
+		
+		        if (bulletDirection == Direction.UP) {
+					if(b.getLocY() <= 0) this.bullets.remove(b);
+					else b.moveBullet();
+		        }
+		
+		        if (bulletDirection == Direction.DOWN) {
+					if(b.getLocY() >= pHEIGHT) this.bullets.remove(b);
+					else b.moveBullet();
+		        }
+			}
+			
+			if(this.bullets.size() == 0) this.bullets = null;
+		}
+		
+	}
+	
 	/**
 	 * adds one part to the snake and sets the new length
 	 * @param d the dot that will be added to the snake
 	 */
 	public void expandSnake(Dot d){
+		//int x = parts
 		parts.add(d);
 		this.length = parts.size();
 		
+	}
+	
+	public void createBullet(){
+		if(this.length > 1){
+			this.parts.remove(this.length - 1);
+			this.length = parts.size();
+			
+			if(this.bullets == null) this.bullets = new ArrayList<Bullet>();
+			System.out.println("*****   Bullet shoot!");	
+			if (headingDirection == Direction.LEFT) bullets.add(new Bullet(DotTyp.BULLET, this.getHead().getLocX() - 10, this.getHead().getLocY(), this.headingDirection));
+		    if (headingDirection == Direction.RIGHT) bullets.add(new Bullet(DotTyp.BULLET, this.getHead().getLocX() + 10, this.getHead().getLocY(), this.headingDirection));
+		    if (headingDirection == Direction.UP) bullets.add(new Bullet(DotTyp.BULLET, this.getHead().getLocX(), this.getHead().getLocY() - 10, this.headingDirection));
+		    if (headingDirection == Direction.DOWN) bullets.add(new Bullet(DotTyp.BULLET, this.getHead().getLocX(), this.getHead().getLocY() + 10, this.headingDirection));
+		}
 	}
 	
 	
@@ -110,6 +160,21 @@ public class Snake {
 	}
 	
 	
+	
+	/**
+	 * @return the bullets
+	 */
+	public List<Bullet> getBullets() {
+		return bullets;
+	}
+
+	/**
+	 * @param bullets the bullets to set
+	 */
+	public void setBullets(List<Bullet> bullets) {
+		this.bullets = bullets;
+	}
+
 	/**
 	 * @return the pWIDTH
 	 */

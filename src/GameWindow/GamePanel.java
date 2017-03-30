@@ -35,7 +35,7 @@ public class GamePanel extends JPanel implements ActionListener {
 	private int HEIGHT;
 	private int WIDTH;
 	
-	private int DELAY = 140;
+	private int DELAY = 80;
 	
 	private Direction direction = Direction.RIGHT;
     private boolean inGame = true;
@@ -181,6 +181,11 @@ public class GamePanel extends JPanel implements ActionListener {
 
 	        if ((key == KeyEvent.VK_DOWN) && (direction != Direction.UP)) {
 	        	if(timer.isRunning()) direction = Direction.DOWN;
+	        }
+	        
+	        if((key == KeyEvent.VK_F)) {
+	        	System.out.println("*****   Try shooting a bullet");
+	        	GameOne.getInstance().shoot();
 	        }
 	        
 	        if(key == KeyEvent.VK_SPACE) {

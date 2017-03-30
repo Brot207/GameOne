@@ -33,5 +33,13 @@ public class Bullet extends Dot {
         }
 	}
 
+	/**
+	 * @return the movingDirection
+	 */
+	public Direction getMovingDirection() {
+		return movingDirection;
+	}
+
+	
 
 }
