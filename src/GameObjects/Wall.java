@@ -2,32 +2,18 @@ package GameObjects;
 
 import javax.swing.ImageIcon;
 
-public class Wall extends ImageIcon {
+public class Wall extends Dot {
 
 	ImageIcon icon = null;
 	
-	private int locX;
-	private int locY;
-	private int wallLength;
-	private boolean isHorizontal;
-	
-	//constructor: single wall
+	//constructor, Start position is not being used
 	public Wall (int x, int y){
-		this.setImage(new ImageIcon("src/Icons/brickwall.jpg").getImage());
-		locX = x;
-		locY = y;
+		super(DotTyp.WALL,x,y);
 	}
 	
-	//constructor: wall with defined length and orientation
-	public Wall (int x, int y, int length, boolean isHorizontal) {
-		this.setImage(new ImageIcon("src/Icons/brickwall.jpg").getImage());
-		locX = x;
-		locY = y;
-		this.wallLength = length;
-		this.isHorizontal = isHorizontal;
-	}
 	
-	public int getLocX() {
+	
+	/*public int getLocX() {
 		return locX;
 	}
 	
@@ -45,19 +31,9 @@ public class Wall extends ImageIcon {
     
 	public ImageIcon getIcon() {
 		return icon;
-	}
+	}*/
 	
-	public int getWallLenght () {
-		return wallLength;
-	}
 	
-	public void setWallLength (int wallLength) {
-		this.wallLength = wallLength;
-	}
-	
-	public boolean getOrientation () {
-		return this.isHorizontal;
-	}
 	
     
 }

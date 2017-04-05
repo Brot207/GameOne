@@ -2,6 +2,8 @@ package GameObjects;
 
 import javax.swing.ImageIcon;
 
+import GameObjects.DotTyp;
+
 /**
  * This is one part of the snake.
  * @author stang
@@ -36,7 +38,12 @@ public class Dot extends ImageIcon {
 		if(p == DotTyp.HEAD){
 			this.setImage(new ImageIcon("src/Icons/head.gif").getImage());
 			this.typ = p;
-		}else{
+		}
+		else if (p == DotTyp.WALL){
+			this.setImage(new ImageIcon("src/Icons/brickwall.jpg").getImage());	
+		}
+		
+		else{
 			this.setImage(new ImageIcon("src/Icons/dot.gif").getImage());
 			this.typ = p;
 		}

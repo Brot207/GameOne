@@ -4,6 +4,8 @@ public enum DotTyp {
 	HEAD,
 	BODYPART,
 	APPLE, 
-	BULLET;
+	BULLET,
+	WALL;
+	
 
 }
