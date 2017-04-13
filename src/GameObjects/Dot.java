@@ -35,18 +35,8 @@ public class Dot extends ImageIcon {
 	 * @param y The y coordinate
 	 */
 	public Dot(DotTyp p, int x, int y){
-		if(p == DotTyp.HEAD){
-			this.setImage(new ImageIcon("src/Icons/head.gif").getImage());
-			this.typ = p;
-		}
-		else if (p == DotTyp.WALL){
-			this.setImage(new ImageIcon("src/Icons/brickwall.jpg").getImage());	
-		}
-		
-		else{
-			this.setImage(new ImageIcon("src/Icons/dot.gif").getImage());
-			this.typ = p;
-		}
+		this.typ = p;
+		this.setImage(this.typ.getImage());
 		
 		locX = x;
 		locY = y;

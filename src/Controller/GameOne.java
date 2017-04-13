@@ -6,6 +6,7 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.beans.EventHandler;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,6 +45,7 @@ public class GameOne {
 	
 	private int pHEIGHT = 600;
 	private int pWIDTH = 800;
+	private int gameTickCount = 0;
 	
 	private int[][] collisionMatrix;
 	
@@ -155,20 +157,20 @@ public class GameOne {
 	public void doDrawingOnGamePanel(Graphics g){
 		g.setColor(Color.LIGHT_GRAY);
 		g.drawString("Snake length:   " + this.snake.getLength(), 10, 35);
+		g.drawString("game is running     " + gameTickCount, 10, 20);
 
 		this.collisionMatrix = new int[this.pWIDTH+1][this.pHEIGHT+1];
 		
-		boolean head = true;
 		int count = 1;
         for (Dot d: snake.getParts()) {
         	count += 1;
             Image dot = d.getImage();
-            if(head){
+            if(d.getTyp() == DotTyp.HEAD){
             	this.collisionMatrix[d.getLocX()][d.getLocY()] = 2;
             	g.drawImage(dot, d.getLocX(), d.getLocY(), gamePanel);
-            	head = false;
             	continue;
             }
+            
             this.collisionMatrix[d.getLocX()][d.getLocY()] = count + 2;
             g.drawImage(dot, d.getLocX(), d.getLocY(), gamePanel);
         }
@@ -209,8 +211,8 @@ public class GameOne {
 	 * and the the snake.
 	 * @param d The direction in which  the snake is moving
 	 */
-	public void move(Direction d, int tick){
-		if(tick % 2 == 0){
+	public void move(Direction d){
+		if(gameTickCount % 2 == 0){
 			this.snake.moveSnake(d);
 		}
 		this.snake.moveBullet();
