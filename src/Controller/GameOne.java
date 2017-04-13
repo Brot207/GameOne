@@ -17,6 +17,7 @@ import GameObjects.allWalls;
 import GameObjects.Bullet;
 import GameObjects.Dot;
 import GameObjects.DotTyp;
+import GameObjects.PowerUp;
 import GameObjects.Snake;
 //WALL
 import GameObjects.Wall;
@@ -107,8 +108,8 @@ public class GameOne {
 	}
 	
 	/**
-	 * creates the snake and other parts like walls and appels.
-	 * creates the collison handler .
+	 * creates the snake and other parts like walls and apples.
+	 * creates the collision handler .
 	 */
 	public void loadGame(){
 		//creates the snake
@@ -122,6 +123,7 @@ public class GameOne {
 		otherParts = new ArrayList<Dot>();
 		otherParts.add(new Dot(DotTyp.HEAD, 100, 100));
 		otherParts.add(new Dot(DotTyp.APPLE, 200, 100));
+		otherParts.add(new PowerUp(DotTyp.STAR, 300, 100));
 		
 		collisionHandler = new CollisionHandler(this.otherParts);
 		
@@ -190,20 +192,20 @@ public class GameOne {
         	}
         }
         
-        //WALL 
-        Image imageWall = wall.getImage();
-        allwalls = new allWalls(1); 
-        
-        for (int i = 0; i < 80; i++) {
-			for (int j = 0; j < 60; j++ ) {
-				if (allwalls.getWallIndex(i,j) == 1) {
-					this.collisionMatrix[i*10][j*10] = 1;
-					g.drawImage(imageWall, i*10, j*10, gamePanel);
-					
-				}
-				
-			}
-		}
+//        //WALL 
+//        Image imageWall = wall.getImage();
+//        allwalls = new allWalls(1); 
+//        
+//        for (int i = 0; i < 80; i++) {
+//			for (int j = 0; j < 60; j++ ) {
+//				if (allwalls.getWallIndex(i,j) == 1) {
+//					this.collisionMatrix[i*10][j*10] = 1;
+//					g.drawImage(imageWall, i*10, j*10, gamePanel);
+//					
+//				}
+//				
+//			}
+//		}
 	}
 	
 	/**

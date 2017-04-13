@@ -14,6 +14,8 @@ public class Dot extends ImageIcon {
 	ImageIcon icon = null;
 	DotTyp typ = null;
 	
+	protected boolean hasEvent;
+	
 	private int locX;
 	private int locY;
 	
@@ -23,7 +25,11 @@ public class Dot extends ImageIcon {
 	 * @param y The y coordinate
 	 */
 	public Dot(int x, int y){
-		this.setImage(new ImageIcon("src/Icons/dot.gif").getImage()); 
+		this.typ = DotTyp.BODYPART;
+		this.setImage(this.typ.getImage()); 
+		
+		this.hasEvent = false;
+		
 		locX = x;
 		locY = y;
 	}
@@ -91,5 +97,12 @@ public class Dot extends ImageIcon {
 	public DotTyp getTyp() {
 		return typ;
 	}
+	
+	public boolean hasEvent(){
+		return this.hasEvent;
+	}
 
+	public void checkEvent(int tick){
+		
+	}
 }

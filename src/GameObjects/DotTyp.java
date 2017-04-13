@@ -9,7 +9,8 @@ public enum DotTyp {
 	BODYPART,
 	APPLE, 
 	BULLET,
-	WALL;
+	WALL,
+	STAR;
 	
 	
 	public Image getImage(){		
@@ -24,6 +25,8 @@ public enum DotTyp {
 				return new ImageIcon("src/Icons/dot.gif").getImage();
 			case WALL:
 				return new ImageIcon("src/Icons/brickwall.jpg").getImage();
+			case STAR:
+				return new ImageIcon("src/Icons/star.png").getImage();
 			default:
 				return new ImageIcon("src/Icons/dot.gif").getImage();	
 		}

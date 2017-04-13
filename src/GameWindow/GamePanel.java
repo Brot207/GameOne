@@ -35,7 +35,7 @@ public class GamePanel extends JPanel implements ActionListener {
 	private int HEIGHT;
 	private int WIDTH;
 	
-	private int DELAY = 80;
+	private int DELAY = 100;
 	
 	private Direction direction = Direction.RIGHT;
     private boolean inGame = true;
