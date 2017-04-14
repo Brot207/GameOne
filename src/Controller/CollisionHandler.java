@@ -22,6 +22,9 @@ public class CollisionHandler {
 	
 	private int[][] collisionMatrix;
 	
+	private static CollisionHandler collisionHandler= null;
+	private static TimerEventHandler eventHandler = null;
+	
 	
 	/**
 	 * constructor

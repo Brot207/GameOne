@@ -13,13 +13,11 @@ import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import GameObjects.allWalls;
 import GameObjects.Bullet;
 import GameObjects.Dot;
 import GameObjects.DotTyp;
 import GameObjects.PowerUp;
 import GameObjects.Snake;
-//WALL
 import GameObjects.Wall;
 import GameWindow.Direction;
 import GameWindow.GameFrame;
@@ -39,6 +37,7 @@ public class GameOne {
 	private static GameOne instance = null;
 	private static CollisionHandler collisionHandler= null;
 	private static TimerEventHandler eventHandler = null;
+	private static ObjectHandler objectHandler = null;
 	
 	private static JFrame startFrame = null;
 	private static JFrame gameFrame = null;
@@ -49,14 +48,12 @@ public class GameOne {
 	private int pWIDTH = 800;
 	private int gameTickCount = 0;
 	
+	private int level = 1;
+	
 	private int[][] collisionMatrix;
 	
 	private Snake snake;
 	private List<Dot> otherParts = null;
-	
-	//WALL
-	private Wall wall;
-	private allWalls allwalls;
 	
 	private GameOne(){
 		
@@ -118,14 +115,9 @@ public class GameOne {
 		this.snake.setpWIDTH(this.pWIDTH);
 		this.snake.setpHEIGHT(this.pHEIGHT);
 		
-		//WALL
-		wall = new Wall(100, 100);
-		
+		objectHandler = new ObjectHandler(level);
 		otherParts = new ArrayList<Dot>();
-		otherParts.add(new Dot(DotTyp.HEAD, 100, 100));
-		otherParts.add(new Dot(DotTyp.APPLE, 200, 100));
-		otherParts.add(new PowerUp(DotTyp.STAR, 300, 100));
-		otherParts.add(new PowerUp(DotTyp.STAR, 400, 100));
+		otherParts = objectHandler.getOtherParts();
 		
 		collisionHandler = new CollisionHandler(this.otherParts);
 		eventHandler = new TimerEventHandler(otherParts);
@@ -203,20 +195,6 @@ public class GameOne {
         	}
         }
         
-//        //WALL 
-//        Image imageWall = wall.getImage();
-//        allwalls = new allWalls(1); 
-//        
-//        for (int i = 0; i < 80; i++) {
-//			for (int j = 0; j < 60; j++ ) {
-//				if (allwalls.getWallIndex(i,j) == 1) {
-//					this.collisionMatrix[i*10][j*10] = 1;
-//					g.drawImage(imageWall, i*10, j*10, gamePanel);
-//					
-//				}
-//				
-//			}
-//		}
 	}
 	
 	/**
