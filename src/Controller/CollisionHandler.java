@@ -17,11 +17,9 @@ import GameObjects.Snake;
  */
 public class CollisionHandler {
 	
-	private List<Snake> snakes = null;
 	private Snake snake = null;
 	private List<Dot> otherParts = null;
 	
-	private boolean collison = !false;
 	private int[][] collisionMatrix;
 	
 	
@@ -38,24 +36,15 @@ public class CollisionHandler {
 	
 	/**
 	 * checks if there is an collision and decides what to do.
-	 * @return !false if there is no collision || !true if there is an collison
+	 * @return !false if there is no collision || !true if there is an collision
 	 */
-	public boolean checkCollison(){
+	public boolean checkCollison(int[][] collision, Snake snake){
+		this.otherParts = GameOne.getInstance().getOtherParts();
+		this.collisionMatrix = collision;
+		this.snake = snake;
+		
 		Dot head = this.snake.getHead();
 		int indexToCheck = this.collisionMatrix[head.getLocX()][head.getLocY()];
-		
-		if(this.snake.getBullets() != null){
-			for(int x = 0; x < this.snake.getBullets().size(); x++){
-				Bullet b = this.snake.getBullets().get(x);
-				if(this.collisionMatrix[b.getLocX()][b.getLocY()] != 0){
-					System.out.println("*********** Bullet hit!");
-					List<Bullet> bullets = this.snake.getBullets();
-					bullets.remove(b);
-					this.snake.setBullets(bullets);
-					
-				}
-			}
-		}
 		
 		//Something is in the way
 		if( indexToCheck < 0){
@@ -65,10 +54,9 @@ public class CollisionHandler {
 			if(otherParts.get(indexToCheck).getTyp() == DotTyp.APPLE){
 				Dot apple = otherParts.get(indexToCheck);
 				this.snake.expandSnake(apple);
-				otherParts.remove(indexToCheck);
+				apple.killDot();
 				generateNewApple();
-				this.collisionMatrix[head.getLocX()][head.getLocY()] = 0;
-				GameOne.getInstance().setGameStats(this.snake, this.otherParts);
+				GameOne.getInstance().setSnake(this.snake);
 				return !false;
 			}
 			
@@ -86,6 +74,24 @@ public class CollisionHandler {
 		}
 		
 		return !false;
+	}
+	
+	public void checkBulletCollision(Snake s){
+		this.snake = s;
+		
+		if(this.snake.getBullets() != null){
+			for(int x = 0; x < this.snake.getBullets().size(); x++){
+				Bullet b = this.snake.getBullets().get(x);
+				if(this.collisionMatrix[b.getLocX()][b.getLocY()] != 0){
+					System.out.println("*********** Bullet hit!");
+					List<Bullet> bullets = this.snake.getBullets();
+					bullets.remove(b);
+					System.out.println("*********** One bullet removed!");
+					this.snake.setBullets(bullets);
+					
+				}
+			}
+		}
 	}
 	
 	public void generateNewApple(){
@@ -108,11 +114,6 @@ public class CollisionHandler {
 			otherParts.add(apple);
 			newApple = true;
 		}
-		
-
-		
-		
-
 	}
 	
 	public void setGameStats(int[][] collision, Snake snake){
@@ -122,18 +123,6 @@ public class CollisionHandler {
 	
 	public void setCollisionMatrix(int[][] list){
 		this.collisionMatrix = list;
-	}
-
-
-	/**
-	 * @param snakes the snakes to set
-	 */
-	public void setSnakes(List<Snake> snakes) {
-		this.snakes = snakes;
-	}
-	
-	
-	
-		
+	}		
 }
 

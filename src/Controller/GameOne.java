@@ -38,6 +38,7 @@ public class GameOne {
 	
 	private static GameOne instance = null;
 	private static CollisionHandler collisionHandler= null;
+	private static TimerEventHandler eventHandler = null;
 	
 	private static JFrame startFrame = null;
 	private static JFrame gameFrame = null;
@@ -124,8 +125,10 @@ public class GameOne {
 		otherParts.add(new Dot(DotTyp.HEAD, 100, 100));
 		otherParts.add(new Dot(DotTyp.APPLE, 200, 100));
 		otherParts.add(new PowerUp(DotTyp.STAR, 300, 100));
+		otherParts.add(new PowerUp(DotTyp.STAR, 400, 100));
 		
 		collisionHandler = new CollisionHandler(this.otherParts);
+		eventHandler = new TimerEventHandler(otherParts);
 		
 	}
 	
@@ -157,6 +160,8 @@ public class GameOne {
 	 * @param g
 	 */
 	public void doDrawingOnGamePanel(Graphics g){
+		gameTickCount += 1;
+		
 		g.setColor(Color.LIGHT_GRAY);
 		g.drawString("Snake length:   " + this.snake.getLength(), 10, 35);
 		g.drawString("game is running     " + gameTickCount, 10, 20);
@@ -182,7 +187,13 @@ public class GameOne {
 	        	Dot d = otherParts.get(z);
 	        	Image dot = d.getImage();
 	        	this.collisionMatrix[d.getLocX()][d.getLocY()] = -(z+1);
-	        	 g.drawImage(dot, d.getLocX(), d.getLocY(), gamePanel);
+	        	g.drawImage(dot, d.getLocX(), d.getLocY(), gamePanel);
+	        	
+	        	if(d.checkEvent(gameTickCount)){
+	        		if(z>0) z--;
+	        		else z = 0;
+	        	}
+	        	 
 	        }
         }
         
@@ -216,10 +227,11 @@ public class GameOne {
 	public void move(Direction d){
 		if(gameTickCount % 2 == 0){
 			this.snake.moveSnake(d);
+			gamePanel.setInGame(collisionHandler.checkCollison(this.collisionMatrix, this.snake));
 		}
 		this.snake.moveBullet();
-		collisionHandler.setGameStats(this.collisionMatrix, this.snake);
-		gamePanel.setInGame(collisionHandler.checkCollison());
+		collisionHandler.checkBulletCollision(this.snake);
+		
 	}
 	
 	public void shoot(){
@@ -230,9 +242,17 @@ public class GameOne {
 	 * @param snake The new snake
 	 * @param parts all the other parts
 	 */
-	public void setGameStats(Snake snake, List<Dot> parts){
+	public void setSnake(Snake snake){
 		this.snake = snake;
-		this.otherParts = parts;
+	}
+	
+	public void setOtherParts(List<Dot> list){
+		this.otherParts = list;
+		eventHandler.setObserver(otherParts);
+	}
+	
+	public List<Dot> getOtherParts(){
+		return this.otherParts;
 	}
 	
 	//Just for startup

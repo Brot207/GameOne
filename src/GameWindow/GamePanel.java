@@ -26,12 +26,6 @@ import GameObjects.Wall;
  *
  */
 public class GamePanel extends JPanel implements ActionListener {
-	
-	private Snake snake = null;
-	
-	//WALL
-	private Wall wall = null;
-	
 	private int HEIGHT;
 	private int WIDTH;
 	

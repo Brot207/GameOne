@@ -1,20 +1,22 @@
 package GameObjects;
 
 import javax.swing.ImageIcon;
+import java.awt.Image;
+import java.util.Observable;
 
 import GameObjects.DotTyp;
 
 /**
- * This is one part of the snake.
- * @author stang
+ * This is one Dot
+ * it is an Observable. This means an Observer can listen to its calls.
  *
  */
-public class Dot extends ImageIcon {
+public class Dot extends Observable {
 	
-	ImageIcon icon = null;
+	private ImageIcon Image = null;
 	DotTyp typ = null;
 	
-	protected boolean hasEvent;
+	protected boolean isAlive = true;
 	
 	private int locX;
 	private int locY;
@@ -26,9 +28,7 @@ public class Dot extends ImageIcon {
 	 */
 	public Dot(int x, int y){
 		this.typ = DotTyp.BODYPART;
-		this.setImage(this.typ.getImage()); 
-		
-		this.hasEvent = false;
+		this.Image = this.typ.getImage();
 		
 		locX = x;
 		locY = y;
@@ -42,7 +42,7 @@ public class Dot extends ImageIcon {
 	 */
 	public Dot(DotTyp p, int x, int y){
 		this.typ = p;
-		this.setImage(this.typ.getImage());
+		this.Image = this.typ.getImage();
 		
 		locX = x;
 		locY = y;
@@ -87,8 +87,8 @@ public class Dot extends ImageIcon {
 	/**
 	 * @return the icon
 	 */
-	public ImageIcon getIcon() {
-		return icon;
+	public Image getImage() {
+		return this.Image.getImage();
 	}
 
 	/**
@@ -98,11 +98,14 @@ public class Dot extends ImageIcon {
 		return typ;
 	}
 	
-	public boolean hasEvent(){
-		return this.hasEvent;
-	}
 
-	public void checkEvent(int tick){
-		
+	public boolean checkEvent(int tick){
+		return false;
+	}
+	
+	public void killDot(){
+		this.isAlive = false;
+		setChanged();				//shows that somethings has happend
+		notifyObservers();			//calls all observers
 	}
 }
