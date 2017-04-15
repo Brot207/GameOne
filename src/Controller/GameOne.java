@@ -82,6 +82,7 @@ public class GameOne {
 			@Override
 			public void run() {
 				//creates the Frame where our game panel will fit in.
+				gameTickCount = 0;
 				gamePanel = new GamePanel(pHEIGHT, pWIDTH);
 
 				
@@ -121,7 +122,6 @@ public class GameOne {
 		
 		collisionHandler = new CollisionHandler(this.otherParts);
 		eventHandler = new TimerEventHandler(otherParts);
-		
 	}
 	
 	public void showStart(){

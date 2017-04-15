@@ -46,6 +46,7 @@ public class GamePanel extends JPanel implements ActionListener {
 		this.HEIGHT = h;
 		this.WIDTH = w;
 		
+		
 		addKeyListener(new TAdapter());
 		setBackground(Color.black);
 		setFocusable(true);
