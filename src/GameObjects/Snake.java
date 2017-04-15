@@ -13,7 +13,7 @@ import GameWindow.Direction;
  */
 public class Snake {
 	
-	private final int startLength = 3;
+	private final int startLength = 4;
 	private int length = startLength;
 	private int dotSize = 10;
 	
@@ -130,7 +130,6 @@ public class Snake {
 	 * @param d the dot that will be added to the snake
 	 */
 	public void expandSnake(Dot d){
-		//int x = parts
 		parts.add(d);
 		this.length = parts.size();
 		

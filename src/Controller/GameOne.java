@@ -163,14 +163,14 @@ public class GameOne {
 		
 		int count = 1;
         for (Dot d: snake.getParts()) {
-        	count += 1;
+            count += 1;
             Image dot = d.getImage();
             if(d.getTyp() == DotTyp.HEAD){
             	this.collisionMatrix[d.getLocX()][d.getLocY()] = 2;
             	g.drawImage(dot, d.getLocX(), d.getLocY(), gamePanel);
             	continue;
             }
-            
+
             this.collisionMatrix[d.getLocX()][d.getLocY()] = count + 2;
             g.drawImage(dot, d.getLocX(), d.getLocY(), gamePanel);
         }

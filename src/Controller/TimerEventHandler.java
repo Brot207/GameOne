@@ -18,8 +18,8 @@ public class TimerEventHandler extends Observable {
 	}
 	
 	public void setObserver(List<Dot> list){
+		this.deleteObservers();
 		for(Dot d: list){
-			this.deleteObservers();
 			this.addObserver(d);
 		}
 	}

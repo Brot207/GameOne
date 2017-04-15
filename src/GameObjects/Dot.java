@@ -117,5 +117,9 @@ public class Dot implements Observer {
 	public void update(Observable o, Object arg) {
 		//need to be here because of implementation type
 		//do not remove
+		
+		if(!isAlive){
+			((TimerEventHandler) o).killDot(this);
+		}
 	}
 }
