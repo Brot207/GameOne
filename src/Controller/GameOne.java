@@ -153,6 +153,7 @@ public class GameOne {
 	 */
 	public void doDrawingOnGamePanel(Graphics g){
 		gameTickCount += 1;
+		eventHandler.makeCall(gameTickCount);
 		
 		g.setColor(Color.LIGHT_GRAY);
 		g.drawString("Snake length:   " + this.snake.getLength(), 10, 35);

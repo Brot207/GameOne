@@ -1,8 +1,12 @@
 package GameObjects;
 
 import javax.swing.ImageIcon;
+
+import Controller.TimerEventHandler;
+
 import java.awt.Image;
 import java.util.Observable;
+import java.util.Observer;
 
 import GameObjects.DotTyp;
 
@@ -11,12 +15,14 @@ import GameObjects.DotTyp;
  * it is an Observable. This means an Observer can listen to its calls.
  *
  */
-public class Dot extends Observable {
+public class Dot implements Observer {
 	
 	private ImageIcon Image = null;
 	DotTyp typ = null;
 	
 	protected boolean isAlive = true;
+	protected int LTT = 50; //LifeTimeTimer
+	protected boolean hasKillTimer = false;
 	
 	private int locX;
 	private int locY;
@@ -105,7 +111,11 @@ public class Dot extends Observable {
 	
 	public void killDot(){
 		this.isAlive = false;
-		setChanged();				//shows that somethings has happend
-		notifyObservers();			//calls all observers
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		//need to be here because of implementation type
+		//do not remove
 	}
 }
