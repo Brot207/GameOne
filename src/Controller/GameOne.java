@@ -55,6 +55,7 @@ public class GameOne {
 	
 	private Snake snake;
 	private List<Dot> otherParts = null;
+	private Level level;
 	
 	private GameOne(){
 		
@@ -114,10 +115,9 @@ public class GameOne {
 	public void loadGame(){
 	
 		objectHandler = new ObjectHandler(lvl);
-		snake = new Snake();
-		snake = objectHandler.getSnake();
-		otherParts = new ArrayList<Dot>();
-		otherParts = objectHandler.getOtherParts();
+		level = objectHandler.getLevel(); 
+		snake = level.getSnake();
+		otherParts = level.getOtherParts();
 		
 		collisionHandler = new CollisionHandler(this.otherParts);
 		eventHandler = new TimerEventHandler(otherParts);

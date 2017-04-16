@@ -21,15 +21,12 @@ public class ObjectHandler {
 	private int[][] wallMatrix = new int [80][60]; //[column][row]
 	
 	public ObjectHandler (int lvl){  
-		snake = new Snake();
+	    snake = new Snake();
 		otherParts = new ArrayList<Dot>();
-		level = new Level(snake, otherParts);
-		snake.setpHEIGHT(level.getpHEIGHT());
-		snake.setpWIDTH(level.getpWIDTH());
-		
 		startingObjects();
 		setWallMatrix(lvl);
 		setWallObjects();
+		level = new Level(snake, otherParts);
 	}
 	
 	private void startingObjects(){
