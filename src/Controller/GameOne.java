@@ -170,7 +170,6 @@ public class GameOne {
             	g.drawImage(dot, d.getLocX(), d.getLocY(), gamePanel);
             	continue;
             }
-
             this.collisionMatrix[d.getLocX()][d.getLocY()] = count + 2;
             g.drawImage(dot, d.getLocX(), d.getLocY(), gamePanel);
         }
@@ -181,12 +180,6 @@ public class GameOne {
 	        	Image dot = d.getImage();
 	        	this.collisionMatrix[d.getLocX()][d.getLocY()] = -(z+1);
 	        	g.drawImage(dot, d.getLocX(), d.getLocY(), gamePanel);
-	        	
-	        	if(d.checkEvent(gameTickCount)){
-	        		if(z>0) z--;
-	        		else z = 0;
-	        	}
-	        	 
 	        }
         }
         
@@ -195,7 +188,6 @@ public class GameOne {
             	g.drawImage(b.getImage(), b.getLocX(), b.getLocY(), gamePanel);
         	}
         }
-        
 	}
 	
 	/**
@@ -210,12 +202,12 @@ public class GameOne {
 		}
 		this.snake.moveBullet();
 		collisionHandler.checkBulletCollision(this.snake);
-		
 	}
 	
 	public void shoot(){
 		this.snake.createBullet();
 	}
+	
 	/**
 	 * sets the game stats:
 	 * @param snake The new snake
@@ -226,7 +218,7 @@ public class GameOne {
 	}
 	
 	public void gameOver(){
-		this.gamePanel.setInGame(false);
+		gamePanel.setInGame(false);
 	}
 	
 	public void setOtherParts(List<Dot> list){

@@ -53,15 +53,19 @@ public class CollisionHandler {
 		if( indexToCheck < 0){
 			indexToCheck *= -1;
 			indexToCheck -= 1;
+			
+			Dot dotOfInterest = otherParts.get(indexToCheck);
+			
 			//if object is an apple
-			if(otherParts.get(indexToCheck).getTyp() == DotTyp.APPLE){
-				Dot apple = otherParts.get(indexToCheck);
-
-				apple.killDot();
-				
-				this.snake.expandSnake(apple);
+			if(dotOfInterest.getTyp() == DotTyp.APPLE){
+				this.snake.expandSnake(dotOfInterest);
+				dotOfInterest.killDot();
 				generateNewApple();
 				GameOne.getInstance().setSnake(this.snake);
+				return !false;
+			}
+			else if(dotOfInterest.getTyp() == DotTyp.STAR){
+				dotOfInterest.killDot();
 				return !false;
 			}
 			

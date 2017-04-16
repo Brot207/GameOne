@@ -22,7 +22,6 @@ public class Dot implements Observer {
 	
 	protected boolean isAlive = true;
 	protected int LTT = 50; //LifeTimeTimer
-	protected boolean hasKillTimer = false;
 	
 	private int locX;
 	private int locY;

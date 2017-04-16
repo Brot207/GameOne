@@ -69,7 +69,7 @@ public class GamePanel extends JPanel implements ActionListener {
 	}
 	
 	/**
-	 * Drwas the snake and other things
+	 * Draws the snake and other things
 	 * @param g
 	 */
 	private void doDrawing(Graphics g) {
