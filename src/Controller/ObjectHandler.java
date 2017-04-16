@@ -19,7 +19,7 @@ public class ObjectHandler {
 	public ObjectHandler (int level){  //constructor is called once and loads all parts at the beginning of the game
 		otherParts = new ArrayList<Dot>();
 		startingObjects();
-		setMatrixZero();
+		//setMatrixZero();
 		setWallMatrix(level);
 		setWallObjects();
 	}
@@ -31,13 +31,16 @@ public class ObjectHandler {
 		otherParts.add(new PowerUp(DotTyp.STAR, 400, 200));
 	}
 	
-	private void setMatrixZero () {
-		for (int i = 0; i < 80; i++) {
-			for (int j = 0; j < 60; j++ ) {
-				this.wallMatrix[i][j] = 0;
-			}
-		}
-	}
+	
+//	Ein array ist per default bei initialisierung mit nur nullen gefüllt
+//	private void setMatrixZero () {
+//		for (int i = 0; i < 80; i++) {
+//			for (int j = 0; j < 60; j++ ) {
+//				this.wallMatrix[i][j] = 0;
+//			}
+//		}
+//	}
+	
 	//DRAW LEVEL
 	private void setWallMatrix (int level) {
 		if (level == 1){

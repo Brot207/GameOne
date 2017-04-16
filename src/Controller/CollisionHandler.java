@@ -87,13 +87,30 @@ public class CollisionHandler {
 		if(this.snake.getBullets() != null){
 			for(int x = 0; x < this.snake.getBullets().size(); x++){
 				Bullet b = this.snake.getBullets().get(x);
-				if(this.collisionMatrix[b.getLocX()][b.getLocY()] != 0){
+				int indexToCheck = this.collisionMatrix[b.getLocX()][b.getLocY()];
+				if(indexToCheck != 0){
 					System.out.println("*********** Bullet hit!");
 					List<Bullet> bullets = this.snake.getBullets();
 					bullets.remove(b);
+					
+
+					indexToCheck *= -1;
+					indexToCheck -= 1;
+					
 					System.out.println("*********** One bullet removed!");
 					this.snake.setBullets(bullets);
 					
+					Dot dotOfInterest = GameOne.getInstance().getOtherParts().get(indexToCheck);
+					if(dotOfInterest.getTyp() == DotTyp.APPLE){
+						dotOfInterest.killDot();
+						generateNewApple();
+					}
+					else{
+						dotOfInterest.killDot();
+					}
+				}
+				else if(indexToCheck > 0){		
+					GameOne.getInstance().gameOver();
 				}
 			}
 		}

@@ -225,6 +225,10 @@ public class GameOne {
 		this.snake = snake;
 	}
 	
+	public void gameOver(){
+		this.gamePanel.setInGame(false);
+	}
+	
 	public void setOtherParts(List<Dot> list){
 		this.otherParts = list;
 		eventHandler.setObserver(otherParts);
