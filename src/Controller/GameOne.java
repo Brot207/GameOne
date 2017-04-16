@@ -19,6 +19,7 @@ import GameObjects.DotTyp;
 import GameObjects.PowerUp;
 import GameObjects.Snake;
 import GameObjects.Wall;
+import GameObjects.Level;
 import GameWindow.Direction;
 import GameWindow.GameFrame;
 import GameWindow.GamePanel;
@@ -48,7 +49,7 @@ public class GameOne {
 	private int pWIDTH = 800;
 	private int gameTickCount = 0;
 	
-	private int level = 1;
+	private int lvl = 1;
 	
 	private int[][] collisionMatrix;
 	
@@ -111,12 +112,10 @@ public class GameOne {
 	 * creates the collision handler .
 	 */
 	public void loadGame(){
-		//creates the snake
+	
+		objectHandler = new ObjectHandler(lvl);
 		snake = new Snake();
-		this.snake.setpWIDTH(this.pWIDTH);
-		this.snake.setpHEIGHT(this.pHEIGHT);
-		
-		objectHandler = new ObjectHandler(level);
+		snake = objectHandler.getSnake();
 		otherParts = new ArrayList<Dot>();
 		otherParts = objectHandler.getOtherParts();
 		

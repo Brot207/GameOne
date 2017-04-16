@@ -10,17 +10,25 @@ import java.util.List;
 import GameObjects.Dot;
 import GameObjects.DotTyp;
 import GameObjects.PowerUp;
+import GameObjects.Level;
+import GameObjects.Snake;
 
 public class ObjectHandler {
 	
+	private Snake snake = null;
 	private List<Dot> otherParts = null;
+	private Level level = null;
 	private int[][] wallMatrix = new int [80][60]; //[column][row]
 	
-	public ObjectHandler (int level){  //constructor is called once and loads all parts at the beginning of the game
+	public ObjectHandler (int lvl){  
+		snake = new Snake();
 		otherParts = new ArrayList<Dot>();
+		level = new Level(snake, otherParts);
+		snake.setpHEIGHT(level.getpHEIGHT());
+		snake.setpWIDTH(level.getpWIDTH());
+		
 		startingObjects();
-		//setMatrixZero();
-		setWallMatrix(level);
+		setWallMatrix(lvl);
 		setWallObjects();
 	}
 	
@@ -31,15 +39,14 @@ public class ObjectHandler {
 		otherParts.add(new PowerUp(DotTyp.STAR, 400, 200));
 	}
 	
+	public Level getLevel() {
+		return this.level;
+	}
 	
-//	Ein array ist per default bei initialisierung mit nur nullen gefüllt
-//	private void setMatrixZero () {
-//		for (int i = 0; i < 80; i++) {
-//			for (int j = 0; j < 60; j++ ) {
-//				this.wallMatrix[i][j] = 0;
-//			}
-//		}
-//	}
+	public Snake getSnake() {
+		return this.snake;
+	}
+	
 	
 	//DRAW LEVEL
 	private void setWallMatrix (int level) {
