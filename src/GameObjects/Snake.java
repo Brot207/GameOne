@@ -13,7 +13,7 @@ import GameWindow.Direction;
  */
 public class Snake {
 	
-	private final int startLength = 4;
+	private final int startLength = 3;
 	private int length = startLength;
 	private int dotSize = 10;
 	
@@ -158,7 +158,9 @@ public class Snake {
 		return null;
 	}
 	
-	
+	public void setStartXY(int x, int y){
+		this.setStartXY(x, y);
+	}
 	
 	/**
 	 * @return the bullets

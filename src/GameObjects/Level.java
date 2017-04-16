@@ -29,6 +29,11 @@ public class Level {
 		
 		startX = 100;
 		startY = 100;
+		
+		this.snake.setStartXY(startX, startY);
+		this.snake.setpHEIGHT(pHEIGHT);
+		this.snake.setpWIDTH(pWIDTH);
+		
 		DELAY = 100;
 		fasterDELAY = 200;
 		
@@ -151,6 +156,7 @@ public class Level {
 	public void setStartXY(int startX, int startY) {
 		this.startX = startX;
 		this.startY = startY;
+		this.snake.setStartXY(startX, startY);
 		this.customConfig = true;
 	}
 	
@@ -160,6 +166,8 @@ public class Level {
 	public void setpW_pH(int pWIDTH, int pHEIGHT) {
 		this.pHEIGHT = pHEIGHT;
 		this.pWIDTH = pWIDTH;
+		this.snake.setpHEIGHT(pHEIGHT);
+		this.snake.setpWIDTH(pWIDTH);
 		this.customConfig = true;
 	}
 	
@@ -168,6 +176,9 @@ public class Level {
 	 */
 	public void setSnake(Snake snake) {
 		this.snake = snake;
+		this.snake.setStartXY(startX, startY);
+		this.snake.setpHEIGHT(pHEIGHT);
+		this.snake.setpWIDTH(pWIDTH);
 	}
 
 	/**
