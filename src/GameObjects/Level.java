@@ -2,6 +2,8 @@ package GameObjects;
 
 import java.util.List;
 
+import GameWindow.Direction;
+
 public class Level {
 	
 	private Snake snake;
@@ -12,6 +14,7 @@ public class Level {
 	
 	private int startX;
 	private int startY;
+	private Direction startingDirection;
 	private int DELAY;
 	private int fasterDELAY;
 	private boolean customConfig = false;
@@ -27,10 +30,12 @@ public class Level {
 		pHEIGHT = 600;
 		pWIDTH = 800;
 		
-		startX = 100;
-		startY = 100;
+		startX = 300;
+		startY = 300;
 		
-		this.snake.setStartXY(startX, startY);
+		startingDirection = Direction.RIGHT;
+		
+		this.snake.setStartXY(startX, startY, startingDirection);
 		this.snake.setpHEIGHT(pHEIGHT);
 		this.snake.setpWIDTH(pWIDTH);
 		
@@ -150,14 +155,17 @@ public class Level {
 		this.customConfig = true;
 	}
 	
+	public void setStartingDirection(Direction d){
+		this.snake.setStartXY(startX, startY, d);
+	}
+	
 	/**
 	 * @param startY the startY to set
 	 */
 	public void setStartXY(int startX, int startY) {
 		this.startX = startX;
 		this.startY = startY;
-		this.snake.setStartXY(startX, startY);
-		this.customConfig = true;
+		this.snake.setStartXY(startX, startY, startingDirection);
 	}
 	
 	/**
@@ -176,7 +184,7 @@ public class Level {
 	 */
 	public void setSnake(Snake snake) {
 		this.snake = snake;
-		this.snake.setStartXY(startX, startY);
+		this.snake.setStartXY(startX, startY, startingDirection);
 		this.snake.setpHEIGHT(pHEIGHT);
 		this.snake.setpWIDTH(pWIDTH);
 	}

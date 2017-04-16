@@ -60,6 +60,11 @@ public class Dot implements Observer {
 	public void setTyp(DotTyp typ) {
 		this.typ = typ;
 	}
+	
+	public void setXY(int x, int y){
+		this.locX = x;
+		this.locY = y;
+	}
 
 	/**
 	 * @return the locX

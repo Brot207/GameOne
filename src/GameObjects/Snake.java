@@ -158,9 +158,31 @@ public class Snake {
 		return null;
 	}
 	
-	public void setStartXY(int x, int y){
-		this.setStartXY(x, y);
+	public void setStartXY(int x, int y, Direction direction){
+		Dot d = this.getHead();
+		d.setLocX(x);
+		d.setLocY(y);
+		
+		if(direction == Direction.RIGHT){
+			for(int i = 1; i < this.length; i++){
+				parts.get(i).setXY(x - i*dotSize, y);
+			}
+		}else if(direction == Direction.LEFT){
+			for(int i = 1; i < this.length; i++){
+				parts.get(i).setXY(x + i*dotSize, y);
+			}
+		}else if(direction == Direction.UP){
+			for(int i = 1; i < this.length; i++){
+				parts.get(i).setXY(x, y - i*dotSize);
+			}
+		}else if(direction == Direction.DOWN){
+			for(int i = 1; i < this.length; i++){
+				parts.get(i).setXY(x, y + i*dotSize);
+			}
+		}
 	}
+	
+	
 	
 	/**
 	 * @return the bullets
