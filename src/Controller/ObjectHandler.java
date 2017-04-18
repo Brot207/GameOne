@@ -10,6 +10,7 @@ import java.util.List;
 import GameObjects.Dot;
 import GameObjects.DotTyp;
 import GameObjects.PowerUp;
+import GameObjects.PowerUpTyp;
 import GameObjects.Level;
 import GameObjects.Snake;
 
@@ -32,8 +33,8 @@ public class ObjectHandler {
 	private void startingObjects(){
 		otherParts.add(new Dot(DotTyp.HEAD, 100, 200));
 		otherParts.add(new Dot(DotTyp.APPLE, 200, 200));
-		otherParts.add(new PowerUp(DotTyp.STAR, 300, 200));
-		otherParts.add(new PowerUp(DotTyp.STAR, 400, 200));
+		otherParts.add(new PowerUp(PowerUpTyp.SHOOT, 300, 200)); //##############
+		otherParts.add(new PowerUp(PowerUpTyp.SHOOT, 400, 200));
 	}
 	
 	public Level getLevel() {

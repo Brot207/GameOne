@@ -107,7 +107,6 @@ public class Dot implements Observer {
 	public DotTyp getTyp() {
 		return typ;
 	}
-	
 
 	public boolean checkEvent(int tick){
 		return false;
