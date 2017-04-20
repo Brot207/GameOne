@@ -64,7 +64,7 @@ public class GamePanel extends JPanel implements ActionListener {
 		doDrawing(g);
 		float pxs = (float) ((1000.0/(float)DELAY)*10.0);
 		pxs = Math.round(pxs*1000.0);
-		g.drawString((pxs/1000.0) / 2.0 + " px/s", 10, 50);
+		g.drawString((pxs/1000.0) / 2.0 + " px/s", 10, this.getHEIGHT() - 10);
 		
 	}
 	
