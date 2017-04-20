@@ -160,25 +160,37 @@ public class GamePanel extends JPanel implements ActionListener {
 
 	        int key = e.getKeyCode();
 
-	        if ((key == KeyEvent.VK_LEFT) && (direction != Direction.RIGHT)) {
-	            if(timer.isRunning()) direction = Direction.LEFT;
+	        if (key == KeyEvent.VK_LEFT){ 
+	        	if(direction != Direction.RIGHT) {
+	        		if(timer.isRunning()) direction = Direction.LEFT;
+	        	}
+	        	GameOne.getInstance().developerMove(Direction.LEFT);
 	        }
 
-	        if ((key == KeyEvent.VK_RIGHT) && (direction != Direction.LEFT)) {
-	        	if(timer.isRunning()) direction = Direction.RIGHT;
+	        if (key == KeyEvent.VK_RIGHT) {
+	        	if (direction != Direction.LEFT) {
+	        		if(timer.isRunning()) direction = Direction.RIGHT;
+	        	}
+	        	GameOne.getInstance().developerMove(Direction.RIGHT);
 	        }
 
-	        if ((key == KeyEvent.VK_UP) && (direction != Direction.DOWN)) {
-	        	if(timer.isRunning()) direction = Direction.UP;
+	        if (key == KeyEvent.VK_UP){
+	        	if (direction != Direction.DOWN) {
+	        		if(timer.isRunning()) direction = Direction.UP;
+	        	}
+	        	GameOne.getInstance().developerMove(Direction.UP);
 	        }
 
-	        if ((key == KeyEvent.VK_DOWN) && (direction != Direction.UP)) {
-	        	if(timer.isRunning()) direction = Direction.DOWN;
+	        if (key == KeyEvent.VK_DOWN) { 
+	        	if(direction != Direction.UP) {
+	        		if(timer.isRunning()) direction = Direction.DOWN;
+	        	}
+	        	GameOne.getInstance().developerMove(Direction.DOWN);
 	        }
 	        
 	        if((key == KeyEvent.VK_F)) {
 	        	System.out.println("*****   Try shooting a bullet");
-	        	GameOne.getInstance().shoot();
+	        	GameOne.getInstance().fAction();
 	        }
 	        
 	        if(key == KeyEvent.VK_SPACE) {

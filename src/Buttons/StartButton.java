@@ -16,7 +16,7 @@ import Controller.GameOne;
  */
 public class StartButton  extends JButton{
 	
-	public StartButton(JPanel p){
+	public StartButton(){
 		this.setText("Start");
 		this.addActionListener(new ActionListener() {
 			

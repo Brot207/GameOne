@@ -45,6 +45,8 @@ public class GameOne {
 	
 	private static GamePanel gamePanel = null;
 	
+	private boolean developerMode = false;
+	
 	private int pHEIGHT = 600;
 	private int pWIDTH = 800;
 	private int gameTickCount = 0;
@@ -121,6 +123,14 @@ public class GameOne {
 		
 		collisionHandler = new CollisionHandler(this.otherParts);
 		eventHandler = new TimerEventHandler(otherParts);
+		
+		
+		if(developerMode){
+			otherParts = new ArrayList<Dot>();
+			snake = new Snake(1);
+			snake.setpHEIGHT(pHEIGHT);
+			snake.setpWIDTH(pWIDTH);
+		}
 	}
 	
 	public void showStart(){
@@ -195,16 +205,31 @@ public class GameOne {
 	 * @param d The direction in which  the snake is moving
 	 */
 	public void move(Direction d){
-		if(gameTickCount % 2 == 0){
-			this.snake.moveSnake(d);
-			gamePanel.setInGame(collisionHandler.checkCollison(this.collisionMatrix, this.snake));
+		if(!developerMode){
+			if(gameTickCount % 2 == 0){
+				this.snake.moveSnake(d);
+				gamePanel.setInGame(collisionHandler.checkCollison(this.collisionMatrix, this.snake));
+			}
+			this.snake.moveBullet();
+			collisionHandler.checkBulletCollision(this.snake);
 		}
-		this.snake.moveBullet();
-		collisionHandler.checkBulletCollision(this.snake);
 	}
 	
-	public void shoot(){
-		this.snake.createBullet();
+	public void developerMove(Direction d){
+		if(developerMode){
+			this.snake.moveSnake(d);
+		}
+	}
+	
+	public void fAction(){
+		if(!developerMode){
+			this.snake.createBullet();
+		}else{
+			int x = snake.getHead().getLocX();
+			int y = snake.getHead().getLocY();
+			
+			otherParts.add(new Dot(DotTyp.WALL, x, y));
+		}
 	}
 	
 	/**
@@ -227,6 +252,11 @@ public class GameOne {
 	
 	public List<Dot> getOtherParts(){
 		return this.otherParts;
+	}
+	
+	public void switchDeveloperMode(){
+		this.developerMode = !this.developerMode;
+		System.out.println("Developer Mode: " + developerMode);
 	}
 	
 	//Just for startup

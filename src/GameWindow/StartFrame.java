@@ -25,7 +25,7 @@ public class StartFrame extends JFrame{
 		panel = new JPanel(new GridLayout(4, 1));
 		panel.setPreferredSize(new Dimension(300, 500));
 	
-		JButton start = new StartButton(panel);
+		JButton start = new StartButton();
 		JButton exit = new ExitButton();
 		JButton config = new OptionButton(panel);
 		panel.add(start);	
