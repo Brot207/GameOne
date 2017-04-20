@@ -130,6 +130,7 @@ public class GameOne {
 			snake = new Snake(1);
 			snake.setpHEIGHT(pHEIGHT);
 			snake.setpWIDTH(pWIDTH);
+			this.collisionMatrix = new int[this.pWIDTH+1][this.pHEIGHT+1];
 		}
 	}
 	
@@ -163,10 +164,6 @@ public class GameOne {
 	public void doDrawingOnGamePanel(Graphics g){
 		gameTickCount += 1;
 		eventHandler.makeCall(gameTickCount);
-		
-		g.setColor(Color.LIGHT_GRAY);
-		g.drawString("Snake length:   " + this.snake.getLength(), 10, 35);
-		g.drawString("game is running     " + gameTickCount, 10, 20);
 
 		this.collisionMatrix = new int[this.pWIDTH+1][this.pHEIGHT+1];
 		
@@ -175,7 +172,7 @@ public class GameOne {
             count += 1;
             Image dot = d.getImage();
             if(d.getTyp() == DotTyp.HEAD){
-            	this.collisionMatrix[d.getLocX()][d.getLocY()] = 2;
+            	this.collisionMatrix[d.getLocX()][d.getLocY()] = 0;
             	g.drawImage(dot, d.getLocX(), d.getLocY(), gamePanel);
             	continue;
             }
@@ -196,6 +193,16 @@ public class GameOne {
         	for(Bullet b: snake.getBullets()){
             	g.drawImage(b.getImage(), b.getLocX(), b.getLocY(), gamePanel);
         	}
+        }
+        
+        if(developerMode){
+        	g.setColor(Color.LIGHT_GRAY);
+        	g.drawString("Move:   use ARROW KEYS", 10, 20);
+        	g.drawString("Set or remove a wall on your current location:   press F", 10, 35);
+        }else{
+        	g.setColor(Color.LIGHT_GRAY);
+        	g.drawString("game is running     " + gameTickCount, 10, 20);
+    		g.drawString("Snake length:   " + this.snake.getLength(), 10, 35);
         }
 	}
 	
@@ -227,8 +234,18 @@ public class GameOne {
 		}else{
 			int x = snake.getHead().getLocX();
 			int y = snake.getHead().getLocY();
-			
-			otherParts.add(new Dot(DotTyp.WALL, x, y));
+			if(collisionMatrix[x][y] == 0) {
+				collisionMatrix[x][y] = 1;
+				otherParts.add(new Dot(DotTyp.WALL, x, y));
+			}
+			else{
+				for(Dot d: otherParts){
+					if(d.getLocX() == x && d.getLocY() == y){
+						otherParts.remove(d);
+						break;
+					}
+				}
+			}
 		}
 	}
 	
