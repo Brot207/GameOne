@@ -273,7 +273,11 @@ public class GameOne {
 	
 	public void switchDeveloperMode(){
 		this.developerMode = !this.developerMode;
+		System.out.println("*********************************************************************************");
+		System.out.println();
 		System.out.println("Developer Mode: " + developerMode);
+		System.out.println();
+		System.out.println("*********************************************************************************");
 	}
 	
 	//Just for startup

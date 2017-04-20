@@ -31,10 +31,13 @@ public class OptionButton  extends JButton{
 				if(count == 10){
 					count = 0;
 					GameOne.getInstance().switchDeveloperMode();
+					p.setBackground(new Color(1, 1, 1));
+				}else{
+					System.out.println("Changed Backgroundcolor: r:" + r + " | g:" + g + " | b:" + b);
+					p.setBackground(new Color(r, g, b));
 				}
 				
-				System.out.println("Changed Backgroundcolor: r:" + r + " | g:" + g + " | b:" + b);
-				p.setBackground(new Color(r, g, b));
+				
 				
 			}
 		});
