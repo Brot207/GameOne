@@ -15,19 +15,19 @@ public enum DotTyp {
 	public ImageIcon getImageIcon(){		
 		switch(this){
 			case HEAD:
-				return new ImageIcon(System.getProperty("user.dir") + "/head.gif");
+				return new ImageIcon("src/Icons/head.gif");
 			case BODYPART:
-				return new ImageIcon(System.getProperty("user.dir") + "/dot.gif");
+				return new ImageIcon("src/Icons/dot.gif");
 			case APPLE:
-				return new ImageIcon(System.getProperty("user.dir") + "/dot.gif");
+				return new ImageIcon("src/Icons/dot.gif");
 			case BULLET:
-				return new ImageIcon(System.getProperty("user.dir") + "/dot.gif");
+				return new ImageIcon("src/Icons/dot.gif");
 			case WALL:
-				return new ImageIcon(System.getProperty("user.dir") + "/brickwall.jpg");
+				return new ImageIcon("src/Icons/brickwall.jpg");
 			case STAR:
-				return new ImageIcon(System.getProperty("user.dir") + "/star.png");
+				return new ImageIcon("src/Icons/star.png");
 			default:
-				return new ImageIcon(System.getProperty("user.dir") + "/dot.gif");	
+				return new ImageIcon("src/Icons/dot.gif");	
 		}
 		
 	}
