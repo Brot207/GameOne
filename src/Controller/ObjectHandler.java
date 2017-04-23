@@ -4,6 +4,13 @@
 
 package Controller;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,6 +35,10 @@ public class ObjectHandler {
 		setWallMatrix(lvl);
 		setWallObjects();
 		level = new Level(snake, otherParts);
+	}
+	
+	public ObjectHandler () { 
+		
 	}
 	
 	private void startingObjects(){
@@ -81,5 +92,87 @@ public class ObjectHandler {
 	public List<Dot> getOtherParts(){
 		return this.otherParts;
 	}
+	
+	public void saveLevel(Level level){
+		File f = new File("Levels.txt");
+		List<Level> levels = loadSavedLevels();
+		levels.add(level);
+		
+		if(f.exists() && !f.isDirectory()){
+			try {
+				FileOutputStream ostream = new FileOutputStream(f);
+				ObjectOutputStream objstream = new ObjectOutputStream(ostream);
+				
+				objstream.writeObject(levels);
+				
+				objstream.close();
+				ostream.close();
+			
+			} catch (FileNotFoundException e) {
+				System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+				System.out.println("!!!!!!!!!!!!!!!!!!!!!FILE_NOT_FOUND!!!!!!!!!!!!!!!!!!!!!!!");
+				System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+				e.printStackTrace();
+			}	catch (IOException e) {
+				System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+				System.out.println("!!!!!!!!!!!!!!!!!ERROR_INITIALIZING_STREAM!!!!!!!!!!!!!!!!");
+				System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+				e.printStackTrace();
+			}
+		} else {
+			try {
+				FileOutputStream ostream = new FileOutputStream(new File("Levels.txt"));
+				ObjectOutputStream objstream = new ObjectOutputStream(ostream);
 
+				objstream.writeObject(levels);
+				
+				objstream.close();
+				ostream.close();
+			
+			} catch (FileNotFoundException e) {
+				System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+				System.out.println("!!!!!!!!!!!!!!!!!!!!!FILE_NOT_FOUND!!!!!!!!!!!!!!!!!!!!!!!");
+				System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+				e.printStackTrace();
+			}	catch (IOException e) {
+				System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+				System.out.println("!!!!!!!!!!!!!!!!!ERROR_INITIALIZING_STREAM!!!!!!!!!!!!!!!!");
+				System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+				e.printStackTrace();
+			}
+		}
+	}
+
+	public List<Level> loadSavedLevels(){
+		File f = new File("Levels.txt");
+		List<Level> levels = new ArrayList<Level>();
+		
+		if(f.exists() && !f.isDirectory()){
+			try {
+				FileInputStream fi = new FileInputStream(f);
+				ObjectInputStream oi = new ObjectInputStream(fi);
+
+	
+				
+				return levels = (List<Level>) oi.readObject();
+
+			
+			} catch (FileNotFoundException e) {
+				System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+				System.out.println("!!!!!!!!!!!!!!!!!!!!!FILE_NOT_FOUND!!!!!!!!!!!!!!!!!!!!!!!");
+				System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+				//e.printStackTrace();
+			}	catch (IOException e) {
+				System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+				System.out.println("!!!!!!!!!!!!!!!!!ERROR_INITIALIZING_STREAM!!!!!!!!!!!!!!!!");
+				System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+				e.printStackTrace();
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		return levels;
+	}
 }

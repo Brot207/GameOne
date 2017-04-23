@@ -1,5 +1,6 @@
 package GameObjects;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,7 +12,7 @@ import GameWindow.Direction;
  * @author stang
  *
  */
-public class Snake {
+public class Snake implements Serializable  {
 	
 	private int startLength = 3;
 	private int length = startLength;

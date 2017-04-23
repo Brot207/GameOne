@@ -3,6 +3,7 @@ package GameWindow;
 
 import Buttons.ExitButton;
 import Buttons.OptionButton;
+import Buttons.ShowSavesButton;
 import Buttons.StartButton;
 
 import java.awt.Dimension;
@@ -28,9 +29,11 @@ public class StartFrame extends JFrame{
 		JButton start = new StartButton();
 		JButton exit = new ExitButton();
 		JButton config = new OptionButton(panel);
+		JButton saves = new ShowSavesButton();
 		panel.add(start);	
 		panel.add(config);
 		panel.add(exit);
+		panel.add(saves);
 		
 		add(panel);
 		pack();

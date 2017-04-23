@@ -60,7 +60,7 @@ public class GameOne {
 	private Level level;
 	
 	private GameOne(){
-		
+		objectHandler = new ObjectHandler();
 	}
 	
 	/**
@@ -126,7 +126,7 @@ public class GameOne {
 		
 		
 		if(developerMode){
-			otherParts = new ArrayList<Dot>();
+			otherParts = null;
 			snake = new Snake(1);
 			snake.setpHEIGHT(pHEIGHT);
 			snake.setpWIDTH(pWIDTH);
@@ -170,7 +170,7 @@ public class GameOne {
 		int count = 1;
         for (Dot d: snake.getParts()) {
             count += 1;
-            Image dot = d.getImage();
+            Image dot = d.getTyp().getImageIcon().getImage();
             if(d.getTyp() == DotTyp.HEAD){
             	this.collisionMatrix[d.getLocX()][d.getLocY()] = 0;
             	g.drawImage(dot, d.getLocX(), d.getLocY(), gamePanel);
@@ -183,7 +183,7 @@ public class GameOne {
         if(otherParts != null){
 	        for(int z = 0; z < otherParts.size(); z++){
 	        	Dot d = otherParts.get(z);
-	        	Image dot = d.getImage();
+	        	Image dot = d.getTyp().getImageIcon().getImage();
 	        	this.collisionMatrix[d.getLocX()][d.getLocY()] = -(z+1);
 	        	g.drawImage(dot, d.getLocX(), d.getLocY(), gamePanel);
 	        }
@@ -191,7 +191,8 @@ public class GameOne {
         
         if(snake.getBullets() != null){
         	for(Bullet b: snake.getBullets()){
-            	g.drawImage(b.getImage(), b.getLocX(), b.getLocY(), gamePanel);
+        		Image dot = b.getTyp().getImageIcon().getImage();
+            	g.drawImage(dot, b.getLocX(), b.getLocY(), gamePanel);
         	}
         }
         
@@ -236,7 +237,12 @@ public class GameOne {
 			int y = snake.getHead().getLocY();
 			if(collisionMatrix[x][y] == 0) {
 				collisionMatrix[x][y] = 1;
-				otherParts.add(new Dot(DotTyp.WALL, x, y));
+				if(otherParts != null){ 
+					otherParts.add(new Dot(DotTyp.WALL, x, y));
+				}else{
+					otherParts = new ArrayList<Dot>();
+					otherParts.add(new Dot(DotTyp.WALL, x, y));
+				}
 			}
 			else{
 				for(Dot d: otherParts){
@@ -247,6 +253,17 @@ public class GameOne {
 				}
 			}
 		}
+	}
+	
+	public void saveLevel(){
+		if(developerMode) {
+			this.level.setOtherParts(otherParts);
+			objectHandler.saveLevel(level);
+		}
+	}
+	
+	public List<Level> getSaves(){
+		return objectHandler.loadSavedLevels();
 	}
 	
 	/**

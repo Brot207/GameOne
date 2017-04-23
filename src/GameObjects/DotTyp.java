@@ -12,22 +12,22 @@ public enum DotTyp {
 	STAR;
 	
 	
-	public ImageIcon getImage(){		
+	public ImageIcon getImageIcon(){		
 		switch(this){
 			case HEAD:
-				return new ImageIcon("src/Icons/head.gif");
+				return new ImageIcon(System.getProperty("user.dir") + "/head.gif");
 			case BODYPART:
-				return new ImageIcon("src/Icons/dot.gif");
+				return new ImageIcon(System.getProperty("user.dir") + "/dot.gif");
 			case APPLE:
-				return new ImageIcon("src/Icons/dot.gif");
+				return new ImageIcon(System.getProperty("user.dir") + "/dot.gif");
 			case BULLET:
-				return new ImageIcon("src/Icons/dot.gif");
+				return new ImageIcon(System.getProperty("user.dir") + "/dot.gif");
 			case WALL:
-				return new ImageIcon("src/Icons/brickwall.jpg");
+				return new ImageIcon(System.getProperty("user.dir") + "/brickwall.jpg");
 			case STAR:
-				return new ImageIcon("src/Icons/star.png");
+				return new ImageIcon(System.getProperty("user.dir") + "/star.png");
 			default:
-				return new ImageIcon("src/Icons/dot.gif");	
+				return new ImageIcon(System.getProperty("user.dir") + "/dot.gif");	
 		}
 		
 	}

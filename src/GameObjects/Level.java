@@ -1,10 +1,11 @@
 package GameObjects;
 
+import java.io.Serializable;
 import java.util.List;
 
 import GameWindow.Direction;
 
-public class Level {
+public class Level implements Serializable {
 	
 	private Snake snake;
 	private List<Dot> otherParts = null;

@@ -5,6 +5,7 @@ import javax.swing.ImageIcon;
 import Controller.TimerEventHandler;
 
 import java.awt.Image;
+import java.io.Serializable;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -15,9 +16,8 @@ import GameObjects.DotTyp;
  * it is an Observable. This means an Observer can listen to its calls.
  *
  */
-public class Dot implements Observer {
+public class Dot implements Observer ,Serializable{
 	
-	private ImageIcon Image = null;
 	DotTyp typ = null;
 	
 	protected boolean isAlive = true;
@@ -33,7 +33,6 @@ public class Dot implements Observer {
 	 */
 	public Dot(int x, int y){
 		this.typ = DotTyp.BODYPART;
-		this.Image = this.typ.getImage();
 		
 		locX = x;
 		locY = y;
@@ -47,7 +46,6 @@ public class Dot implements Observer {
 	 */
 	public Dot(DotTyp p, int x, int y){
 		this.typ = p;
-		this.Image = this.typ.getImage();
 		
 		locX = x;
 		locY = y;
@@ -92,13 +90,6 @@ public class Dot implements Observer {
 	 */
 	public void setLocY(int locY) {
 		this.locY = locY;
-	}
-
-	/**
-	 * @return the icon
-	 */
-	public Image getImage() {
-		return this.Image.getImage();
 	}
 
 	/**

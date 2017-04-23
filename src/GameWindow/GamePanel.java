@@ -193,6 +193,11 @@ public class GamePanel extends JPanel implements ActionListener {
 	        	GameOne.getInstance().fAction();
 	        }
 	        
+	        if((key == KeyEvent.VK_G)) {
+	        	System.out.println("*****   Save Level");
+	        	GameOne.getInstance().saveLevel();
+	        }
+	        
 	        if(key == KeyEvent.VK_SPACE) {
 	        
 	        	if(timer.isRunning()) {
