@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import GameObjects.Bullet;
@@ -105,7 +106,7 @@ public class GameOne {
 	 * Starts the game
 	 */
 	public void initGame(){
-		loadGame();
+		loadGameDetails();
 		switchStartFrame();
 		gameLoopInit();
 	}
@@ -114,7 +115,7 @@ public class GameOne {
 	 * creates the snake and other parts like walls and apples.
 	 * creates the collision handler .
 	 */
-	public void loadGame(){
+	public void loadGameDetails(){
 	
 		objectHandler = new ObjectHandler(lvl);
 		level = objectHandler.getLevel(); 
@@ -126,7 +127,8 @@ public class GameOne {
 		
 		
 		if(developerMode){
-			otherParts = null;
+			eventHandler.deleteObservers();
+			otherParts = new ArrayList<Dot>();
 			snake = new Snake(1);
 			snake.setpHEIGHT(pHEIGHT);
 			snake.setpWIDTH(pWIDTH);
@@ -164,6 +166,19 @@ public class GameOne {
 	public void doDrawingOnGamePanel(Graphics g){
 		gameTickCount += 1;
 		eventHandler.makeCall(gameTickCount);
+    	
+		if(developerMode){
+	        g.setColor(Color.LIGHT_GRAY);
+	        g.drawString("ARROW KEYS: Move", 10, 20);
+	        g.drawString("F: Set or remove a wall on your current location", 10, 35);
+	        g.drawString("G: Save Level", 10, 50);
+	        g.drawString("H: Set Starting location", 10, 65);
+	        g.drawString("ECS: Exit to start", 10, 90);
+		}else{
+	        g.setColor(Color.LIGHT_GRAY);
+	        g.drawString("game is running     " + gameTickCount, 10, 20);
+	    	g.drawString("Snake length:   " + this.snake.getLength(), 10, 35);
+		}
 
 		this.collisionMatrix = new int[this.pWIDTH+1][this.pHEIGHT+1];
 		
@@ -195,16 +210,6 @@ public class GameOne {
             	g.drawImage(dot, b.getLocX(), b.getLocY(), gamePanel);
         	}
         }
-        
-        if(developerMode){
-        	g.setColor(Color.LIGHT_GRAY);
-        	g.drawString("Move:   use ARROW KEYS", 10, 20);
-        	g.drawString("Set or remove a wall on your current location:   press F", 10, 35);
-        }else{
-        	g.setColor(Color.LIGHT_GRAY);
-        	g.drawString("game is running     " + gameTickCount, 10, 20);
-    		g.drawString("Snake length:   " + this.snake.getLength(), 10, 35);
-        }
 	}
 	
 	/**
@@ -231,6 +236,7 @@ public class GameOne {
 	
 	public void fAction(){
 		if(!developerMode){
+			System.out.println("*****   Try shooting a bullet");
 			this.snake.createBullet();
 		}else{
 			int x = snake.getHead().getLocX();
@@ -252,6 +258,38 @@ public class GameOne {
 					}
 				}
 			}
+		}
+	}
+	
+	public void hAction(){
+		if(developerMode){
+			int x = snake.getHead().getLocX();
+			int y = snake.getHead().getLocY();
+			
+			Direction[] dir = Direction.values();
+			
+			gameFrame.setAlwaysOnTop(false);
+			
+			Direction input = (Direction) JOptionPane.showInputDialog(null, "Choose now...",
+			        "Choose the starting direction", JOptionPane.QUESTION_MESSAGE, null, // Use
+			                                                                        // default
+			                                                                        // icon
+			        dir, // Array of choices
+			        dir[1]); // Initial choice
+			
+			level.setStartXY(x, y);
+			level.setStartingDirection(input);
+			
+			gameFrame.setAlwaysOnTop(true);
+			
+			for(Dot d: otherParts){
+				if(d.getTyp() == DotTyp.HEADMARK){
+					d.killDot();
+				}
+			}
+			
+			otherParts.add(new Dot(DotTyp.HEADMARK, x, y));
+			eventHandler.setObserver(otherParts);
 		}
 	}
 	

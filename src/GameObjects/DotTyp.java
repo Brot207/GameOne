@@ -9,7 +9,8 @@ public enum DotTyp {
 	APPLE, 
 	BULLET,
 	WALL,
-	STAR;
+	STAR,
+	HEADMARK;
 	
 	
 	public ImageIcon getImageIcon(){		
@@ -26,6 +27,8 @@ public enum DotTyp {
 				return new ImageIcon("src/Icons/brickwall.jpg");
 			case STAR:
 				return new ImageIcon("src/Icons/star.png");
+			case HEADMARK:
+				return new ImageIcon("src/Icons/redCross.png");
 			default:
 				return new ImageIcon("src/Icons/dot.gif");	
 		}
