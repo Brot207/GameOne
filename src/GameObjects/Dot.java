@@ -63,6 +63,10 @@ public class Dot implements Observer ,Serializable{
 		this.locX = x;
 		this.locY = y;
 	}
+	
+	public void setLTT(int z){
+		LTT = z;
+	}
 
 	/**
 	 * @return the locX

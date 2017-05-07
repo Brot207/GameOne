@@ -18,6 +18,7 @@ import GameObjects.Bullet;
 import GameObjects.Dot;
 import GameObjects.DotTyp;
 import GameObjects.PowerUp;
+import GameObjects.PowerUpTyp;
 import GameObjects.Snake;
 import GameObjects.Wall;
 import GameObjects.Level;
@@ -173,7 +174,8 @@ public class GameOne {
 	        g.drawString("F: Set or remove a wall on your current location", 10, 35);
 	        g.drawString("G: Save Level", 10, 50);
 	        g.drawString("H: Set Starting location", 10, 65);
-	        g.drawString("ECS: Exit to start", 10, 90);
+	        g.drawString("J: Create PowerUp", 10, 80);
+	        g.drawString("ECS: Exit to start", 10, 110);
 		}else{
 	        g.setColor(Color.LIGHT_GRAY);
 	        g.drawString("game is running     " + gameTickCount, 10, 20);
@@ -272,8 +274,8 @@ public class GameOne {
 			
 			Direction input = (Direction) JOptionPane.showInputDialog(null, "Choose now...",
 			        "Choose the starting direction", JOptionPane.QUESTION_MESSAGE, null, // Use
-			                                                                        // default
-			                                                                        // icon
+			                                                                        	// default
+			                                                                        	// icon
 			        dir, // Array of choices
 			        dir[1]); // Initial choice
 			
@@ -292,6 +294,33 @@ public class GameOne {
 			eventHandler.setObserver(otherParts);
 		}
 	}
+	
+	public void jAction(){
+		if(developerMode){
+			int x = snake.getHead().getLocX();
+			int y = snake.getHead().getLocY();
+			
+			PowerUpTyp[] dir = PowerUpTyp.values();
+			
+			gameFrame.setAlwaysOnTop(false);
+			
+			PowerUpTyp input = (PowerUpTyp) JOptionPane.showInputDialog(null, "Choose now...",
+			        "Choose the starting direction", JOptionPane.QUESTION_MESSAGE, null, // Use
+			                                                                        	// default
+			                                                                        	// icon
+			        dir, // Array of choices
+			        dir[0]); // Initial choice
+			
+			int LTT = Integer.parseInt(JOptionPane.showInputDialog("geben sie den LTT an", "...."));
+			
+			gameFrame.setAlwaysOnTop(true);
+			
+			PowerUp p = new PowerUp(input, x, y);
+			p.setLTT(LTT);
+			otherParts.add(p);
+		}
+	}
+	
 	
 	public void saveLevel(){
 		if(developerMode) {

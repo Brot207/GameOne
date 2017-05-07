@@ -202,6 +202,11 @@ public class GamePanel extends JPanel implements ActionListener {
 	        	GameOne.getInstance().hAction();
 	        }
 	        
+	        if((key == KeyEvent.VK_J)) {
+	        	System.out.println("*****   Creating PowerUp");
+	        	GameOne.getInstance().jAction();
+	        }
+	        
 	        if(key == KeyEvent.VK_SPACE) {
 	        
 	        	if(timer.isRunning()) {

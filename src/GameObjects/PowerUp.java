@@ -11,7 +11,7 @@ public class PowerUp extends Dot{
 	public PowerUp(PowerUpTyp p, int x, int y) {
 		//super(p, x, y);
 		super(DotTyp.STAR, x, y); //all PowerUps are stars
-		setLTT(p);
+		//setLTT(p);
 		
 	}
 	
@@ -22,10 +22,10 @@ public class PowerUp extends Dot{
 		}	
 	}
 	
-	public void setLTT(PowerUpTyp pTyp){
-		switch(pTyp) {
-		    case SHOOT: this.LTT = 70; break;
-		    default: this.LTT = 50;
-		}
-	}
+//	public void setLTT(PowerUpTyp pTyp){
+//		switch(pTyp) {
+//		    case SHOOT: this.LTT = 70; break;
+//		    default: this.LTT = 50;
+//		}
+//	}
 }
